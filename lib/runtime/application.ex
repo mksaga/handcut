@@ -7,6 +7,7 @@ defmodule HandCut.Runtime.Application do
     ]
 
   def start(_type, _args) do
-    Handcut.Runtime.Server.start_link()
+    # Handcut.Runtime.Server.start_link()
+    Agent.start_link(fn _ -> end)
   end
 end
