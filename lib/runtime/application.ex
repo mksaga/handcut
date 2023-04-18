@@ -6,8 +6,12 @@ defmodule HandCut.Runtime.Application do
       event_store: HandCut.EventStore
     ]
 
+  # router(HandCut.Restaurants.Router)
+  # router(HandCut.Certifications.Router)
+
+  router HandCut.RestaurantRouter
+
   def start(_type, _args) do
-    # Handcut.Runtime.Server.start_link()
-    Agent.start_link(fn _ -> end)
+    Handcut.Runtime.Server.start_link()
   end
 end

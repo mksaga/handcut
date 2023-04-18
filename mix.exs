@@ -27,6 +27,7 @@ defmodule HandCut.MixProject do
       {:commanded_eventstore_adapter, "~> 1.4"},
       {:eventstore, "~> 1.4"},
       {:jason, "~> 1.3"},
+      {:nanoid, "~> 2.0.5"},
     ]
   end
 end
