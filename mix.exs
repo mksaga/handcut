@@ -25,6 +25,7 @@ defmodule HandCut.MixProject do
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
       {:commanded, "~> 1.4"},
       {:commanded_eventstore_adapter, "~> 1.4"},
+      {:eventstore, "~> 1.4"},
       {:jason, "~> 1.3"},
     ]
   end
