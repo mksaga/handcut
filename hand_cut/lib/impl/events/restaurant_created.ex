@@ -1,4 +1,4 @@
-defmodule RestaurantCreated do
+defmodule HandCut.Events.RestaurantCreated do
   @derive Jason.Encoder
 
   defstruct [

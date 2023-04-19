@@ -1,4 +1,4 @@
-defmodule ActivateRestaurant do
+defmodule HandCut.Commands.ActivateRestaurant do
   @enforce_keys [:id]
   defstruct [
     :id,

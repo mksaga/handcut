@@ -1,4 +1,4 @@
-defmodule Restaurant do
+defmodule HandCut.Aggregates.Restaurant do
   defstruct [
     :name,
     :id,
@@ -12,6 +12,10 @@ defmodule Restaurant do
     :instagram,
     :google_maps,
   ]
+
+  alias HandCut.Aggregates.Restaurant
+  alias HandCut.Commands.{ActivateRestaurant, CreateRestaurant}
+  alias HandCut.Events.{RestaurantCreated, RestaurantActivated}
 
   # Public API
 
@@ -45,7 +49,6 @@ defmodule Restaurant do
   def execute(%Restaurant{}, %CreateRestaurant{}),
     do: {:error, :already_created}
 
-    # TODO: how do we know that ID matches across struct and command?
   def execute(%Restaurant{id: id, active: false}, %ActivateRestaurant{id: id}) do
     event = %RestaurantActivated{
       id: id,
