@@ -6,6 +6,7 @@ defmodule HandCut.Repo.Migrations.CreateRestaurants do
       add :name, :string
       add :code, :string
       add :active, :boolean
+      add :cash_only, :boolean
       add :activated_at, :utc_datetime
       add :address, :string
       add :phone, :string

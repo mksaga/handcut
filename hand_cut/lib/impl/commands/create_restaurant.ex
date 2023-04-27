@@ -6,6 +6,7 @@ defmodule HandCut.Commands.CreateRestaurant do
     :address,
     :phone,
     :area,
+    :cash_only,
     :cuisine,
     :url,
     :instagram,
