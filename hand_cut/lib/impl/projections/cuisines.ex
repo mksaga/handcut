@@ -13,6 +13,7 @@ defmodule HandCut.Restaurant.Cuisines do
     [
       :asian,
       :korean,
+      :chinese,
       :japanese,
       :thai
     ]
