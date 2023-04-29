@@ -21,6 +21,7 @@ defmodule HandCut.Restaurant do
   end
 
   def changeset(restaurant, attrs) do
+    IO.inspect attrs
     restaurant
     |> cast(attrs, [
       :name,
@@ -36,5 +37,15 @@ defmodule HandCut.Restaurant do
       :instagram,
       :google_maps
     ])
+  end
+
+  def activate_changeset(restaurant, %{activated_at: activated_at, active: true} = attrs) do
+    restaurant
+    |> cast(attrs, [
+          :activated_at,
+          :active
+        ])
+    |> put_change(:activated_at, activated_at)
+    |> put_change(:active, true)
   end
 end
