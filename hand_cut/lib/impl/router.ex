@@ -1,10 +1,11 @@
 defmodule HandCut.Router do
   use Commanded.Commands.Router
 
-  alias HandCut.Aggregates.{Restaurant}
-  alias HandCut.Commands.{CreateRestaurant}
+  alias HandCut.Aggregates.{ActivationRequest, Restaurant}
+  alias HandCut.Commands.{ActivateRestaurant, CreateRestaurant}
 
   identify(Restaurant, by: :id)
+  identify(ActivationRequest, by: :restaurant_code)
 
-  dispatch [CreateRestaurant], to: Restaurant
+  dispatch [ActivateRestaurant, CreateRestaurant], to: Restaurant
 end
