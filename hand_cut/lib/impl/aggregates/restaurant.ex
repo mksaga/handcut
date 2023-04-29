@@ -57,7 +57,7 @@ defmodule HandCut.Aggregates.Restaurant do
   def execute(%Restaurant{id: id, active: false}, %ActivateRestaurant{id: id}) do
     event = %RestaurantActivated{
       id: id,
-      activated_at: DateTime.now("Etc/UTC"),
+      activated_at: DateTime.utc_now(),
     }
 
     {:ok, event}
@@ -96,5 +96,9 @@ defmodule HandCut.Aggregates.Restaurant do
       url: url,
       instagram: instagram
     }
+  end
+
+  def apply(%Restaurant{id: code} = restaurant, %RestaurantActivated{id: code} = event) do
+    %{restaurant | active: true}
   end
 end
