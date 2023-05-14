@@ -7,7 +7,6 @@ defmodule HandCutWeb.MixProject do
       version: "0.1.0",
       elixir: "~> 1.12",
       elixirc_paths: elixirc_paths(Mix.env()),
-      compilers: [:gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps()
@@ -48,7 +47,9 @@ defmodule HandCutWeb.MixProject do
       {:plug_cowboy, "~> 2.5"},
 
       {:dart_sass, "~> 0.6", runtime: Mix.env() == :dev},
-      {:bulma, "0.9.3"}
+      {:bulma, "0.9.3"},
+
+      {:hand_cut, path: "../hand_cut"}
     ]
   end
 
