@@ -45,7 +45,10 @@ defmodule HandCutWeb.MixProject do
       {:telemetry_poller, "~> 1.0"},
       {:gettext, "~> 0.18"},
       {:jason, "~> 1.2"},
-      {:plug_cowboy, "~> 2.5"}
+      {:plug_cowboy, "~> 2.5"},
+
+      {:dart_sass, "~> 0.6", runtime: Mix.env() == :dev},
+      {:bulma, "0.9.3"}
     ]
   end
 
@@ -58,7 +61,7 @@ defmodule HandCutWeb.MixProject do
   defp aliases do
     [
       setup: ["deps.get"],
-      "assets.deploy": ["esbuild default --minify", "phx.digest"]
+      "assets.deploy": ["sass default --no-source-map --style=compressed", "esbuild default --minify", "phx.digest"]
     ]
   end
 end
