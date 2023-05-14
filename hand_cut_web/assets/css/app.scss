@@ -1,0 +1,9 @@
+/* This file is for your main application CSS */
+
+// override bulma variables before import to customize
+$phoenix-orange: #f05423;
+$primary: $phoenix-orange;
+
+@import "bulma";
+
+// add our own styles after the Bulma import
