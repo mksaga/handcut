@@ -3,6 +3,5 @@ defmodule HandCut.Events.ActivationRequestApproved do
 
   defstruct [
     :restaurant_code,
-    :approved_at,
   ]
 end

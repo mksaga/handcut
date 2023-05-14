@@ -3,7 +3,9 @@ defmodule HandCut.Runtime.Server do
     children = [
       HandCut.Runtime.App,
       HandCut.Projections.Repo,
+      HandCut.Projectors.ActivationRequestProjector,
       HandCut.Projectors.RestaurantProjector,
+      HandCut.ProcessManagers.ActivationRequestProcessManager,
     ]
 
     opts = [strategy: :one_for_one, name: HandCut.Supervisor]

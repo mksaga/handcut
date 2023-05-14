@@ -33,4 +33,8 @@ defmodule HandCut.MixProject do
       {:nanoid, "~> 2.0.5"},
     ]
   end
+
+  # Include `test/support` files in test environment
+  defp elixirc_paths(:test), do: ["lib", "test/support"]
+  defp elixirc_paths(_), do: ["lib"]
 end

@@ -17,34 +17,22 @@ defmodule HandCut.Aggregates.Restaurant do
   alias HandCut.Aggregates.Restaurant
   alias HandCut.Commands.{ActivateRestaurant, CreateRestaurant}
   alias HandCut.Events.{RestaurantCreated, RestaurantActivated}
+  alias HandCut.Events.{ActivationRequestCreated}
 
   # Public API
 
   def execute(%Restaurant{id: nil}, %CreateRestaurant{} = command) do
-    %CreateRestaurant{
-      name: name,
-      id: id,
-      phone: phone,
-      address: address,
-      cash_only: cash_only,
-      area: area,
-      cuisine: cuisine,
-      url: url,
-      instagram: instagram,
-      google_maps: google_maps
-    } = command
-
     event = %RestaurantCreated{
-      name: name,
-      id: id,
-      address: address,
-      phone: phone,
-      cash_only: cash_only,
-      area: area,
-      cuisine: cuisine,
-      url: url,
-      instagram: instagram,
-      google_maps: google_maps,
+      name: command.name,
+      id: command.id,
+      address: command.address,
+      phone: command.phone,
+      cash_only: command.cash_only,
+      area: command.area,
+      cuisine: command.cuisine,
+      url: command.url,
+      instagram: command.instagram,
+      google_maps: command.google_maps,
     }
 
     {:ok, event}
@@ -71,34 +59,28 @@ defmodule HandCut.Aggregates.Restaurant do
     # State Mutators
 
   def apply(%Restaurant{}, %RestaurantCreated{} = event) do
-    %RestaurantCreated{
-      name: name,
-      id: id,
-      address: address,
-      phone: phone,
-      cash_only: cash_only,
-      area: area,
-      cuisine: cuisine,
-      url: url,
-      instagram: instagram
-    } = event
-
     %Restaurant{
-      name: name,
-      id: id,
+      name: event.name,
+      id: event.id,
       active: false,
       activated_at: nil,
-      address: address,
-      cash_only: cash_only,
-      phone: phone,
-      area: area,
-      cuisine: cuisine,
-      url: url,
-      instagram: instagram
+      address: event.address,
+      phone: event.phone,
+      cash_only: event.cash_only,
+      area: event.area,
+      cuisine: event.cuisine,
+      url: event.url,
+      instagram: event.instagram,
+      google_maps: event.google_maps,
     }
   end
 
   def apply(%Restaurant{id: code} = restaurant, %RestaurantActivated{id: code} = event) do
     %{restaurant | active: true}
+  end
+
+  # Nothing to do here!
+  def apply(%Restaurant{id: code} = restaurant, %ActivationRequestCreated{restaurant_code: code}) do
+    restaurant
   end
 end

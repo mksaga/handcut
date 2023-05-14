@@ -1,6 +1,6 @@
 defmodule HandCut.Projectors.RestaurantProjector do
 
-  alias HandCut.Restaurant
+  alias HandCut.Projections.Restaurant
   alias HandCut.Events.{RestaurantCreated, RestaurantActivated}
 
   use Commanded.Projections.Ecto,
@@ -9,18 +9,7 @@ defmodule HandCut.Projectors.RestaurantProjector do
     name: "restaurant"
 
   project(
-    %RestaurantCreated{
-      name: name,
-      id: code,
-      address: address,
-      cash_only: cash_only,
-      phone: phone,
-      area: area,
-      cuisine: cuisine,
-      url: url,
-      instagram: instagram,
-      google_maps: google_maps
-    },
+    %RestaurantCreated{} = event,
     _metadata,
     fn multi ->
       Ecto.Multi.insert(
@@ -29,18 +18,18 @@ defmodule HandCut.Projectors.RestaurantProjector do
         Restaurant.changeset(
           %Restaurant{},
           %{
-            name: name,
-            code: code,
+            name: event.name,
+            code: event.id,
             active: false,
             activated_at: nil,
-            address: address,
-            cash_only: cash_only,
-            phone: phone,
-            area: area,
-            cuisine: cuisine,
-            url: url,
-            instagram: instagram,
-            google_maps: google_maps
+            address: event.address,
+            cash_only: event.cash_only,
+            phone: event.phone,
+            area: event.area,
+            cuisine: event.cuisine,
+            url: event.url,
+            instagram: event.instagram,
+            google_maps: event.google_maps
           }
         )
       )

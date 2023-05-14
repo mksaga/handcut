@@ -1,4 +1,4 @@
-defmodule HandCut.Restaurant do
+defmodule HandCut.Projections.Restaurant do
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -18,10 +18,11 @@ defmodule HandCut.Restaurant do
     field(:url, :string)
     field(:instagram, :string)
     field(:google_maps, :string)
+
+    timestamps()
   end
 
   def changeset(restaurant, attrs) do
-    IO.inspect attrs
     restaurant
     |> cast(attrs, [
       :name,

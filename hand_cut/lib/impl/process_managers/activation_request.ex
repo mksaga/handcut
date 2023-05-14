@@ -3,6 +3,8 @@ defmodule HandCut.ProcessManagers.ActivationRequestProcessManager do
   application: HandCut.Runtime.App,
   name: "ActivationRequestProcessManager"
 
+  @derive Jason.Encoder
+
   defstruct [
     :restaurant_id,
   ]

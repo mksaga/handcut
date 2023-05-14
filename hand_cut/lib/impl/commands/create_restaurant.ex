@@ -1,5 +1,5 @@
 defmodule HandCut.Commands.CreateRestaurant do
-  @derive {Inspect, only: [:name, :address, :area]}
+  # @derive {Inspect, only: [:name, :address, :area]}
   defstruct [
     :name,
     :id,
