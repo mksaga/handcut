@@ -1,0 +1,19 @@
+<section class="search-form">
+    <div class="level">
+        <div class="level-item">
+    <h1 class="title">Welcome to HandCut!</h1>
+        </div>
+        <div class="level-item">
+    <h2 class="subtitle">Let us know where you're looking and what we're looking for.</h2>
+        </div>
+        <div class="level-item">
+    <SearchUI.select label="Location" options={@locations}/>
+        </div>
+        <div class="level-item">
+    <SearchUI.multi_select label="Cuisine (choose 1+)" options={@cuisines}/>
+        </div>
+        <div class="level-item">
+    <SearchUI.submit />
+        </div>
+    </div>
+</section>
