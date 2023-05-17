@@ -7,18 +7,18 @@ defmodule HandCut.Restaurant.Areas do
 
   def nj() do
     [
-      :nj_newark,
-      :nj_paramus,
-      :nj_ridgewood,
-      :nj_cliffside_park,
-      :nj_paterson,
-      :nj_jersey_city
+      %{value: :nj_newark, state: "NJ", name: "Newark"},
+      %{value: :nj_paramus, state: "NJ", name: "Paramus"},
+      %{value: :nj_ridgewood, state: "NJ", name: "Ridgewood"},
+      %{value: :nj_cliffside_park, state: "NJ", name: "Cliffside Park"},
+      %{value: :nj_paterson, state: "NJ", name: "Paterson"},
+      %{value: :nj_jersey_city, state: "NJ", name: "Jersey City"},
     ]
   end
 
   def ny() do
     [
-      :ny_brooklyn,
+      # %{value: :ny_brooklyn, state: "NY", name: "Brooklyn"},
     ]
   end
 end
