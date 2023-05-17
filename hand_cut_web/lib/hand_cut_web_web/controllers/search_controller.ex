@@ -1,30 +1,13 @@
 defmodule HandCutWebWeb.SearchController do
   use HandCutWebWeb, :controller
+  alias HandCut.Restaurant.{Cuisines, Areas}
 
   def locations() do
-    [
-      %{
-        value: "nj_newark",
-        label: "(NJ) Newark"
-      },
-      %{
-        value: "nj_jersey_city",
-        label: "(NJ) Jersey City"
-      }
-    ]
+   Areas.all_areas()
   end
 
   def cuisines() do
-    [
-      %{
-        value: "bengali",
-        label: "Bengali"
-      },
-      %{
-        value: "mediterranean",
-        label: "Mediterranean"
-      },
-    ]
+   Cuisines.all_cuisines()
   end
 
   def search(conn, _params) do
