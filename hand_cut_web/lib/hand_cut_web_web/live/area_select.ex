@@ -10,11 +10,7 @@ defmodule HandCutWebWeb.AreaSelect do
         <div class="field-body"
         <div class="control">
             <div class="select">
-                <select>
-                  <%= for choice <- @options do %>
-                    <option value={choice.value}><%= "(" <> choice.state <> ") " <> choice.name %></option>
-                  <% end %>
-                </select>
+                <%= select @form, :area, @options %>
             </div>
         </div>
     </div>
