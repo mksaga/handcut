@@ -1,6 +1,11 @@
 defmodule HandCut.Restaurant.Areas do
   alias HandCut.Restaurant.Areas
 
+  def all_area_atoms() do
+   all_areas()
+   |> Enum.map(&(elem(&1, 1)))
+  end
+
   def all_areas() do
     Enum.reduce([Areas.nj(), Areas.ny()], fn x, acc -> x ++ acc end)
   end
