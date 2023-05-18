@@ -1,4 +1,25 @@
 <div>
     <h1 class="title"><%= @restaurant.name %></h1>
-    <p><%= @restaurant.code %></p>
+    <figure class="image is-16by9">
+        <img src="http://localhost:4000/images/placeholders/640x360.png">
+    </figure>
+    <div class="level is-mobile pt-2">
+        <div class="level-left">
+            <div class="level-item">
+                <p><%= @restaurant.address %></p>
+            </div>
+        </div>
+        <div class="level-right">
+            <div class="level-item">
+                <span class="tag is-primary is-light"><%= @restaurant.cuisine %></span>
+            </div>
+        </div>
+    </div>
+    <div class="level is-mobile pt-2">
+        <div class="level-left">
+            <div class="level-item">
+                <p>Certified by: <%= @certification.agency %> (expires <%= @certification.expires %>)</p>
+            </div>
+        </div>
+    </div>
 </div>
