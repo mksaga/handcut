@@ -2,6 +2,7 @@ defmodule HandCut.Projections.Restaurant do
   use Ecto.Schema
   import Ecto.{Changeset, Query}
 
+  alias HandCut.Projections.Restaurant
   alias HandCut.Restaurant.Areas
   alias HandCut.Restaurant.Cuisines
 
@@ -48,6 +49,10 @@ defmodule HandCut.Projections.Restaurant do
         ])
     |> put_change(:activated_at, activated_at)
     |> put_change(:active, true)
+  end
+
+  def get_code(code) do
+    HandCut.Projections.Repo.get_by(Restaurant, code: code)
   end
 
   def filter_search(params) do
