@@ -1,16 +1,9 @@
-defmodule HandCutWebWeb.SearchController do
+defmodule HandCutWebWeb.RestaurantController do
   use HandCutWebWeb, :controller
-  alias HandCut.Restaurant.{Cuisines, Areas}
+  alias HandCut.Projections.Restaurant
 
-  def locations() do
-   Areas.all_areas()
-  end
-
-  def cuisines() do
-   Cuisines.all_cuisines()
-  end
-
-  def search(conn, _params) do
-    render(conn, "search.html", locations: locations(), cuisines: cuisines())
+  def show(conn, params) do
+    restaurant = Restaurant.get_code("restaurant_" <> params["code"])
+    render(conn, "restaurant.html", restaurant: restaurant)
   end
 end
