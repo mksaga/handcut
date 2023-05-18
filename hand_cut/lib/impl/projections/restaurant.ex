@@ -1,6 +1,6 @@
 defmodule HandCut.Projections.Restaurant do
   use Ecto.Schema
-  import Ecto.Changeset
+  import Ecto.{Changeset, Query}
 
   alias HandCut.Restaurant.Areas
   alias HandCut.Restaurant.Cuisines
@@ -48,5 +48,33 @@ defmodule HandCut.Projections.Restaurant do
         ])
     |> put_change(:activated_at, activated_at)
     |> put_change(:active, true)
+  end
+
+  def filter_search(params) do
+    results = "restaurants"
+    # TODO: filter on active also
+    # |> where([r], r.active == true)
+    |> filter_area(params["area"])
+    |> filter_cuisines(params["cuisines"])
+    |> select([r], map(r, [:name, :code, :address, :phone, :area, :cuisine, :url, :instagram]))
+    |> HandCut.Projections.Repo.all()
+
+    IO.inspect results
+    results
+  end
+
+  def filter_area(query, area) do
+    query
+    |> where([r], r.area == ^area)
+  end
+
+  # Don't restrict results if no cuisines are provided
+  def filter_cuisines(query, nil) do
+    query
+  end
+
+  def filter_cuisines(query, cuisines) do
+    query
+    |> where([r], r.cuisine in ^cuisines)
   end
 end

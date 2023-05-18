@@ -27,7 +27,7 @@ defmodule HandCut.MixProject do
       {:commanded, "~> 1.4"},
       {:commanded_ecto_projections, "~> 1.3"},
       {:commanded_eventstore_adapter, "~> 1.4"},
-      {:ecto_sql, "~> 3.0"},
+      {:ecto_sql, "~> 3.10"},
       {:eventstore, "~> 1.4"},
       {:jason, "~> 1.3"},
       {:nanoid, "~> 2.0.5"},
