@@ -3,6 +3,7 @@ defmodule HandCutWebWeb.RestaurantResult do
 
   def render(assigns) do
     ~H"""
+    <a href={Routes.restaurant_path(@socket, :show, @result.code)}>
     <div class="card m-2">
         <div class="card-image">
             <figure class="image is-4by3">
@@ -20,6 +21,7 @@ defmodule HandCutWebWeb.RestaurantResult do
             </div>
         </div>
     </div>
+    </a>
     """
   end
 end
