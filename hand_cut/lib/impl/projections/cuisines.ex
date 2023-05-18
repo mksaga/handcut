@@ -11,20 +11,16 @@ defmodule HandCut.Restaurant.Cuisines do
 
   def east_asian() do
     [
-      %{value: :asian, label: "Asian"},
-      %{value: :korean, label: "Korean"},
-      %{value: :chinese, label: "Chinese"},
-      %{value: :japanese, label: "Japanese"},
+      {"Chinese", :chinese},
     ]
   end
 
   def southeast_asian() do
     [
-      %{value: :bengali, label: "Bengali"},
-      %{value: :thai, label: "Thai"},
-      # :pakistani,
-      # :desi,
-      # :indian
+      {"Bengali", :bengali},
+      {"Thai", :thai},
+      {"Pakistani", :pakistani},
+      {"Indian", :indian},
     ]
   end
 end
