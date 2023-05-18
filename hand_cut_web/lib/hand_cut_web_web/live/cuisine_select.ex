@@ -5,7 +5,7 @@ defmodule HandCutWebWeb.CuisineSelect do
     ~H"""
     <div class="field is-horizontal">
         <div class="field-label">
-        <label class="label"><%= @label %></label>
+        <label class="label">Cuisines</label>
         </div>
         <div class="field-body"
         <div class="control">
