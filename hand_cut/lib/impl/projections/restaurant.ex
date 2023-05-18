@@ -58,8 +58,6 @@ defmodule HandCut.Projections.Restaurant do
     |> filter_cuisines(params["cuisines"])
     |> select([r], map(r, [:name, :code, :address, :phone, :area, :cuisine, :url, :instagram]))
     |> HandCut.Projections.Repo.all()
-
-    IO.inspect results
     results
   end
 
