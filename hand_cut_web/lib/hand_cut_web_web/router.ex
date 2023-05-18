@@ -18,8 +18,7 @@ defmodule HandCutWebWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
-    get "/search", SearchController, :search
-    live "/lsearch", SearchLive, :index
+    live "/search", SearchLive, :index
   end
 
   # Other scopes may use custom stacks.
