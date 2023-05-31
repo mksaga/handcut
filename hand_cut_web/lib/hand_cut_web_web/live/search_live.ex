@@ -24,10 +24,17 @@ defmodule HandCutWebWeb.SearchLive do
     {:noreply, push_navigate(socket, to: "/results?#{query}")}
   end
 
+  def handle_event("update", %{"area" => new_area}, socket) do
+    {:noreply, assign(socket, form: %{"area" => new_area})}
+  end
+
   def handle_event("update", %{"area" => new_area, "cuisines" => new_cuisines} = revised_form, socket) do
     {:noreply, assign(socket, form: %{revised_form | "area" => new_area, "cuisines" => new_cuisines})}
 end
 
+  # 18 May 2023: thought about it and since we don't have many zabiha options just yet,
+  # will remove cuisine selection from search and show all restaurants in area X
+  # <.live_component module={CuisineSelect} id="cuisine-select" options={cuisines()} form={f}/>
   def render(assigns) do
     ~H"""
     <div class="level">
@@ -44,9 +51,6 @@ end
         <.form for={@form} let={f} phx-change="update" phx-submit="search">
             <div class="level-item">
                 <.live_component module={AreaSelect} id="area-select" options={areas()} form={f}/>
-            </div>
-            <div class="level-item">
-                <.live_component module={CuisineSelect} id="cuisine-select" options={cuisines()} form={f}/>
             </div>
 
             <div class="level-item">

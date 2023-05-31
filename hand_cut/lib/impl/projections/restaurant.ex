@@ -1,7 +1,8 @@
 defmodule HandCut.Projections.Restaurant do
   use Ecto.Schema
-  import Ecto.Changeset
+  import Ecto.{Changeset, Query}
 
+  alias HandCut.Projections.Restaurant
   alias HandCut.Restaurant.Areas
   alias HandCut.Restaurant.Cuisines
 
@@ -13,8 +14,8 @@ defmodule HandCut.Projections.Restaurant do
     field(:activated_at, :utc_datetime)
     field(:address, :string)
     field(:phone, :string)
-    field(:area, Ecto.Enum, values: Enum.map(Areas.all_areas(), &(elem(&1, 1))))
-    field(:cuisine, Ecto.Enum, values: Enum.map(Cuisines.all_cuisines(), &(elem(&1, 1))))
+    field(:area, Ecto.Enum, values: Areas.all_area_atoms())
+    field(:cuisine, Ecto.Enum, values: Cuisines.all_cuisine_atoms())
     field(:url, :string)
     field(:instagram, :string)
     field(:google_maps, :string)
@@ -48,5 +49,35 @@ defmodule HandCut.Projections.Restaurant do
         ])
     |> put_change(:activated_at, activated_at)
     |> put_change(:active, true)
+  end
+
+  def get_code(code) do
+    HandCut.Projections.Repo.get_by(Restaurant, code: code)
+  end
+
+  def filter_search(params) do
+    results = "restaurants"
+    # TODO: filter on active also
+    # |> where([r], r.active == true)
+    |> filter_area(params["area"])
+    |> filter_cuisines(params["cuisines"])
+    |> select([r], map(r, [:name, :code, :address, :phone, :area, :cuisine, :url, :instagram]))
+    |> HandCut.Projections.Repo.all()
+    results
+  end
+
+  def filter_area(query, area) do
+    query
+    |> where([r], r.area == ^area)
+  end
+
+  # Don't restrict results if no cuisines are provided
+  def filter_cuisines(query, nil) do
+    query
+  end
+
+  def filter_cuisines(query, cuisines) do
+    query
+    |> where([r], r.cuisine in ^cuisines)
   end
 end

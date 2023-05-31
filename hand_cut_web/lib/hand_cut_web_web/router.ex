@@ -20,6 +20,7 @@ defmodule HandCutWebWeb.Router do
     get "/", PageController, :index
     live "/search", SearchLive, :index
     live "/results", ResultsLive, :index
+    live "/rest/:code", RestaurantLive, :show
   end
 
   # Other scopes may use custom stacks.

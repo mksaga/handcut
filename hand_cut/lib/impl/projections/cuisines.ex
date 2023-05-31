@@ -1,6 +1,11 @@
 defmodule HandCut.Restaurant.Cuisines do
   alias HandCut.Restaurant.Cuisines
 
+  def all_cuisine_atoms() do
+    all_cuisines()
+    |> Enum.map(&(elem(&1, 1)))
+  end
+
   def all_cuisines() do
     Enum.reduce(
       [

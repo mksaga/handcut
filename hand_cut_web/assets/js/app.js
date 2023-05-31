@@ -21,18 +21,57 @@
 
 // Include phoenix_html to handle method=PUT/DELETE in forms and buttons.
 import "phoenix_html"
+
+let Hooks = {}
+let map;
+
+// import "./google_maps.js"
+
+Hooks.RestaurantMap = {
+    mounted() {
+        console.log("Ay Ay Ay!");
+
+        let latitude = -25.344
+        let longitude = 131.031
+          // The location of Uluru
+        const position = { lat: latitude, lng: longitude };
+        // Request needed libraries.
+        //@ts-ignore
+        const { Map: GMap } = google.maps.importLibrary("maps");
+        const { AdvancedMarkerElement } = google.maps.importLibrary("marker");
+
+        // The map, centered at Uluru
+        map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 4,
+            center: position,
+            mapId: "DEMO_MAP_ID",
+        });
+
+        // The marker, positioned at Uluru
+        const marker = new AdvancedMarkerElement({
+            map: map,
+            position: position,
+            title: "Uluru",
+        });
+
+    }
+}
+
+
 // Establish Phoenix Socket and LiveView configuration.
 import {Socket} from "phoenix"
 import {LiveSocket} from "phoenix_live_view"
 import topbar from "../vendor/topbar"
 
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
-let liveSocket = new LiveSocket("/live", Socket, {params: {_csrf_token: csrfToken}})
+let liveSocket = new LiveSocket("/live", Socket, {params: {_csrf_token: csrfToken}, hooks: Hooks})
 
 // Show progress bar on live navigation and form submits
 topbar.config({barColors: {0: "#29d"}, shadowColor: "rgba(0, 0, 0, .3)"})
 window.addEventListener("phx:page-loading-start", info => topbar.show())
-window.addEventListener("phx:page-loading-stop", info => topbar.hide())
+window.addEventListener("phx:page-loading-stop", info => topbar.hide() )
+window.addEventListener("phx:map-init", coords => { console.log(coords.lat); } )
+// window.addEventListener("phx:map-init", (coords) => initMap(coords.lat, coords.long) )
 
 // connect if there are any LiveViews on the page
 liveSocket.connect()
