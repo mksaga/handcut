@@ -24,6 +24,10 @@ defmodule HandCutWebWeb.SearchLive do
     {:noreply, push_navigate(socket, to: "/results?#{query}")}
   end
 
+  def handle_event("update", %{"area" => new_area}, socket) do
+    {:noreply, assign(socket, form: %{"area" => new_area})}
+  end
+
   def handle_event("update", %{"area" => new_area, "cuisines" => new_cuisines} = revised_form, socket) do
     {:noreply, assign(socket, form: %{revised_form | "area" => new_area, "cuisines" => new_cuisines})}
 end
