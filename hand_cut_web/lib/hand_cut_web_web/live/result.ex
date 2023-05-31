@@ -3,7 +3,7 @@ defmodule HandCutWebWeb.RestaurantResult do
 
   def render(assigns) do
     ~H"""
-    <a href={Routes.restaurant_path(@socket, :show, @result.code)}>
+    <a href={Routes.restaurant_path(@socket, :show, String.split(@result.code, "_") |> Enum.at(1))}>
     <div class="card m-2">
         <div class="card-image">
             <figure class="image is-4by3">
@@ -16,7 +16,7 @@ defmodule HandCutWebWeb.RestaurantResult do
                     <p class="title is-4"><%= @result.name %></p>
                 </div>
                 <div class="level-right">
-                    <p class="subtitle is-6"><%= @result.cuisine %></p>
+                    <span class="tag is-info is-light"><%= @result.cuisine |> String.capitalize() %></span>
                 </div>
             </div>
         </div>
