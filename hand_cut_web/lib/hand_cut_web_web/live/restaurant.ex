@@ -24,6 +24,8 @@ defmodule HandCutWebWeb.RestaurantLive do
      |> assign(:maps_key, maps_key)
      |> assign(:google_maps_url, google_maps_url)
      |> assign(:apple_maps_url, apple_maps_url)
+     |> assign(:latitude, 40.761269595284915)
+     |> assign(:longitude,  -73.92330252208907)
     }
   end
 
@@ -55,7 +57,7 @@ defmodule HandCutWebWeb.RestaurantLive do
     </div>
     <div>
     <h1 class="title" phx-click="ping"><%= @restaurant.name %></h1>
-    <figure class="image is-16by9" phx-hook="RestaurantMap" id="map">
+    <figure class="image is-16by9" phx-hook="RestaurantMap" id="map" data-lat={@latitude} data-long={@longitude}>
               <img src="http://localhost:4000/images/placeholders/640x360.png" />
     </figure>
     <div class="level is-mobile pt-2">
