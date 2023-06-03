@@ -29,31 +29,30 @@ let map;
 
 Hooks.RestaurantMap = {
     mounted() {
-        let latitude = parseFloat(this.el.dataset.lat)
-        let longitude = parseFloat(this.el.dataset.long)
+        let latitude = parseFloat(this.el.dataset.lat);
+        let longitude = parseFloat(this.el.dataset.long);
+        let name = this.el.dataset.name;
         initMap(latitude, longitude);
     }
 }
 
-async function initMap(latitude, longitude) {
-  const position = { lat: latitude, lng: longitude };
+async function initMap(latitude, longitude, name) {
   // Request needed libraries.
   //@ts-ignore
   const { Map } = await google.maps.importLibrary("maps");
-  const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
-
-  // The map, centered at Uluru
+  const position = { lat: latitude, lng: longitude };
   map = new Map(document.getElementById("map"), {
-    zoom: 13,
+    zoom: 14,
     center: position,
-    mapId: "DEMO_MAP_ID",
   });
 
+  // Add marker
+  const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
   // The marker, positioned at Uluru
   const marker = new AdvancedMarkerElement({
     map: map,
     position: position,
-    title: "Uluru",
+    title: name,
   });
 }
 
