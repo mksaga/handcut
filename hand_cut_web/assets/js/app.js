@@ -32,28 +32,38 @@ Hooks.RestaurantMap = {
         let latitude = parseFloat(this.el.dataset.lat);
         let longitude = parseFloat(this.el.dataset.long);
         let name = this.el.dataset.name;
-        initMap(latitude, longitude);
+        initMap(latitude, longitude, name);
     }
 }
 
 async function initMap(latitude, longitude, name) {
   // Request needed libraries.
-  //@ts-ignore
   const { Map } = await google.maps.importLibrary("maps");
   const position = { lat: latitude, lng: longitude };
   map = new Map(document.getElementById("map"), {
-    zoom: 14,
+    zoom: 15,
     center: position,
   });
 
   // Add marker
   const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
   // The marker, positioned at Uluru
-  const marker = new AdvancedMarkerElement({
-    map: map,
-    position: position,
-    title: name,
-  });
+    const simpleMarker = new google.maps.Marker({
+        position: position,
+        map,
+        title: name,
+        label: {
+            text: name,
+            color: "#C70E20",
+            fontWeight: "bold"
+        },
+        icon: {
+            url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png",
+            labelOrigin: new google.maps.Point(68, 32),
+            size: new google.maps.Size(32,32),
+            anchor: new google.maps.Point(16,32)
+        },
+    })
 }
 
 
