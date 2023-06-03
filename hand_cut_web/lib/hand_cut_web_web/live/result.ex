@@ -1,6 +1,8 @@
 defmodule HandCutWebWeb.RestaurantResult do
   use HandCutWebWeb, :live_component
 
+  alias HandCutWebWeb.Components
+
   def render(assigns) do
     ~H"""
     <a href={Routes.restaurant_path(@socket, :show, String.split(@result.code, "_") |> Enum.at(1))}>
@@ -16,7 +18,9 @@ defmodule HandCutWebWeb.RestaurantResult do
                     <p class="title is-4"><%= @result.name %></p>
                 </div>
                 <div class="level-right">
-                    <span class="tag is-info is-light"><%= @result.cuisine |> String.capitalize() %></span>
+                  <div class="level-item">
+                    <Components.cuisine_label cuisine={@result.cuisine} />
+                    </div>
                 </div>
             </div>
         </div>
