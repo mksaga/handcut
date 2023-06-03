@@ -23,6 +23,11 @@ defmodule HandCutWebWeb.ResultsLive do
             <h2 class="subtitle"><%= length(@results) %> <%= @cuisines %> in <%= @area %></h2>
         </div>
     </div>
+
+    <figure class="image is-4by3" id="results-map" phx-hook="ResultsMap">
+        <img src="http://localhost:4000/images/placeholders/1280x960.png" alt="Placeholder image">
+    </figure>
+
     <div>
         <%= for result <- @results do %>
             <.live_component module={RestaurantResult} id={"result-#{result.code}"} result={result}} />

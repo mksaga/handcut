@@ -36,6 +36,12 @@ Hooks.RestaurantMap = {
     }
 }
 
+Hooks.ResultsMap = {
+    mounted() {
+        console.log("pong!");
+    }
+}
+
 async function initMap(latitude, longitude, name) {
   // Request needed libraries.
   const { Map } = await google.maps.importLibrary("maps");
@@ -66,6 +72,51 @@ async function initMap(latitude, longitude, name) {
     })
 }
 
+function computeCenter(results) {
+    let avgLatitude, avgLongitude;
+    for (const result in results) {
+        avgLatitude += result.latitude
+        avgLongitude += result.longitude
+    }
+    return {
+        lat: avgLatitude / results.length,
+        lng: avgLongitude / results.length,
+
+    }
+}
+
+async function initResultsMap(results) {
+  // Request needed libraries.
+  const { Map } = await google.maps.importLibrary("maps");
+  const position = computeCenter(results);
+  map = new Map(document.getElementById("results-map"), {
+    zoom: 15,
+    center: position,
+  });
+
+    let markers
+
+  // Add marker
+    for (result in results) {
+
+    }
+    const simpleMarker = new google.maps.Marker({
+        position: position,
+        map,
+        title: name,
+        label: {
+            text: name,
+            color: "#C70E20",
+            fontWeight: "bold"
+        },
+        icon: {
+            url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png",
+            labelOrigin: new google.maps.Point(68, 32),
+            size: new google.maps.Size(32,32),
+            anchor: new google.maps.Point(16,32)
+        },
+    })
+}
 
 
 // Establish Phoenix Socket and LiveView configuration.
