@@ -9,10 +9,11 @@
     <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/app.css")}/>
     <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/app.js")}></script>
   </head>
-  <body>
+  <body class="pt-3">
+      <Components.navbar />
   <section class="section">
     <div class="container">
-    <%= @inner_content %>
+      <%= @inner_content %>
     </div>
   </section>
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>

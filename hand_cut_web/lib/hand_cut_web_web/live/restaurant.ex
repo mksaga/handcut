@@ -68,7 +68,7 @@ defmodule HandCutWebWeb.RestaurantLive do
                 </div>
                 <div class="level-item">
                     <!-- TODO Fix telephone link -->
-                    <a href={"tel+" <> @restaurant.phone}><p><%= @restaurant.phone %></p></a>
+                    <a href={"tel:" <> @restaurant.phone}><p><%= @restaurant.phone %></p></a>
                 </div>
             </div>
         </div>
