@@ -29,33 +29,36 @@ let map;
 
 Hooks.RestaurantMap = {
     mounted() {
-        console.log("Ay Ay Ay!");
-
-        let latitude = -25.344
-        let longitude = 131.031
-          // The location of Uluru
-        const position = { lat: latitude, lng: longitude };
-        // Request needed libraries.
-        //@ts-ignore
-        const { Map: GMap } = google.maps.importLibrary("maps");
-        const { AdvancedMarkerElement } = google.maps.importLibrary("marker");
-
-        // The map, centered at Uluru
-        map = new google.maps.Map(document.getElementById("map"), {
-            zoom: 4,
-            center: position,
-            mapId: "DEMO_MAP_ID",
-        });
-
-        // The marker, positioned at Uluru
-        const marker = new AdvancedMarkerElement({
-            map: map,
-            position: position,
-            title: "Uluru",
-        });
-
+        console.log("inside mounted()")
+        let latitude = parseFloat(this.el.dataset.lat)
+        let longitude = parseFloat(this.el.dataset.long)
+        initMap(latitude, longitude);
+        this.handleEvent("phx:map-init", ({latitude, longitude}) => initMap(latitude, longitude));
     }
 }
+
+async function initMap(latitude, longitude) {
+  const position = { lat: latitude, lng: longitude };
+  // Request needed libraries.
+  //@ts-ignore
+  const { Map } = await google.maps.importLibrary("maps");
+  const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+
+  // The map, centered at Uluru
+  map = new Map(document.getElementById("map"), {
+    zoom: 13,
+    center: position,
+    mapId: "DEMO_MAP_ID",
+  });
+
+  // The marker, positioned at Uluru
+  const marker = new AdvancedMarkerElement({
+    map: map,
+    position: position,
+    title: "Uluru",
+  });
+}
+
 
 
 // Establish Phoenix Socket and LiveView configuration.
@@ -70,8 +73,6 @@ let liveSocket = new LiveSocket("/live", Socket, {params: {_csrf_token: csrfToke
 topbar.config({barColors: {0: "#29d"}, shadowColor: "rgba(0, 0, 0, .3)"})
 window.addEventListener("phx:page-loading-start", info => topbar.show())
 window.addEventListener("phx:page-loading-stop", info => topbar.hide() )
-window.addEventListener("phx:map-init", coords => { console.log(coords.lat); } )
-// window.addEventListener("phx:map-init", (coords) => initMap(coords.lat, coords.long) )
 
 // connect if there are any LiveViews on the page
 liveSocket.connect()
