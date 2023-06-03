@@ -29,11 +29,9 @@ let map;
 
 Hooks.RestaurantMap = {
     mounted() {
-        console.log("inside mounted()")
         let latitude = parseFloat(this.el.dataset.lat)
         let longitude = parseFloat(this.el.dataset.long)
         initMap(latitude, longitude);
-        this.handleEvent("phx:map-init", ({latitude, longitude}) => initMap(latitude, longitude));
     }
 }
 
