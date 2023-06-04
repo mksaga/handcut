@@ -29,6 +29,7 @@ let map;
 
 Hooks.RestaurantMap = {
     mounted() {
+        // Pull attributes off of <figure data-*> HTML attributes
         let latitude = parseFloat(this.el.dataset.lat);
         let longitude = parseFloat(this.el.dataset.long);
         let name = this.el.dataset.name;
@@ -38,9 +39,8 @@ Hooks.RestaurantMap = {
 
 Hooks.ResultsMap = {
     mounted() {
-        console.log("pong!");
+        // Pull results from socket state
         this.pushEvent("get_restaurant_results", {}, (serverReply) => {
-            console.log(serverReply.results)
             initResultsMap(serverReply.results);
       });
     }
@@ -102,9 +102,8 @@ async function initResultsMap(results) {
 
   const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
 
-    let markers = new Array(results.length)
-
-  // Add marker
+  // Add a marker for each
+  let markers = new Array(results.length)
     for (i in results) {
         let position = {lat: results[i].lat, lng: results[i].lng}
         markers[i] = new google.maps.Marker({
