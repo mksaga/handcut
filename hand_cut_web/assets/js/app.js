@@ -56,7 +56,7 @@ async function initMap(latitude, longitude, name) {
   });
 
   // Add marker
-  const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+  await google.maps.importLibrary("marker");
   // The marker, positioned at Uluru
     const simpleMarker = new google.maps.Marker({
         position: position,
@@ -100,7 +100,7 @@ async function initResultsMap(results) {
     center: center,
   });
 
-  const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+  await google.maps.importLibrary("marker");
 
   // Add a marker for each
   let markers = new Array(results.length)
