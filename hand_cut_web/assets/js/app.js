@@ -39,6 +39,10 @@ Hooks.RestaurantMap = {
 Hooks.ResultsMap = {
     mounted() {
         console.log("pong!");
+        this.pushEvent("get_restaurant_results", {}, (serverReply) => {
+            console.log(serverReply.results)
+            initResultsMap(serverReply.results);
+      });
     }
 }
 
@@ -73,10 +77,10 @@ async function initMap(latitude, longitude, name) {
 }
 
 function computeCenter(results) {
-    let avgLatitude, avgLongitude;
-    for (const result in results) {
-        avgLatitude += result.latitude
-        avgLongitude += result.longitude
+    let avgLatitude = 0.0, avgLongitude = 0.0;
+    for (i in results) {
+        avgLatitude += results[i].lat
+        avgLongitude += results[i].lng
     }
     return {
         lat: avgLatitude / results.length,
@@ -88,34 +92,27 @@ function computeCenter(results) {
 async function initResultsMap(results) {
   // Request needed libraries.
   const { Map } = await google.maps.importLibrary("maps");
-  const position = computeCenter(results);
+
+  // Calculate center of results
+  const center = computeCenter(results);
   map = new Map(document.getElementById("results-map"), {
-    zoom: 15,
-    center: position,
+    zoom: 12,
+    center: center,
   });
 
-    let markers
+  const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+
+    let markers = new Array(results.length)
 
   // Add marker
-    for (result in results) {
-
+    for (i in results) {
+        let position = {lat: results[i].lat, lng: results[i].lng}
+        markers[i] = new google.maps.Marker({
+            position,
+            map,
+            label: results[i].label,
+        })
     }
-    const simpleMarker = new google.maps.Marker({
-        position: position,
-        map,
-        title: name,
-        label: {
-            text: name,
-            color: "#C70E20",
-            fontWeight: "bold"
-        },
-        icon: {
-            url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png",
-            labelOrigin: new google.maps.Point(68, 32),
-            size: new google.maps.Size(32,32),
-            anchor: new google.maps.Point(16,32)
-        },
-    })
 }
 
 
