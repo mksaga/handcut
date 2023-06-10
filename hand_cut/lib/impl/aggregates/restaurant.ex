@@ -10,6 +10,8 @@ defmodule HandCut.Aggregates.Restaurant do
     :area,
     :cuisine,
     :url,
+    :latitude,
+    :longitude,
     :instagram,
     :google_maps,
   ]
@@ -31,6 +33,8 @@ defmodule HandCut.Aggregates.Restaurant do
       area: command.area,
       cuisine: command.cuisine,
       url: command.url,
+      latitude: command.latitude,
+      longitude: command.longitude,
       instagram: command.instagram,
       google_maps: command.google_maps,
     }
@@ -70,12 +74,14 @@ defmodule HandCut.Aggregates.Restaurant do
       area: event.area,
       cuisine: event.cuisine,
       url: event.url,
+      latitude: event.latitude,
+      longitude: event.longitude,
       instagram: event.instagram,
       google_maps: event.google_maps,
     }
   end
 
-  def apply(%Restaurant{id: code} = restaurant, %RestaurantActivated{id: code} = event) do
+  def apply(%Restaurant{id: code} = restaurant, %RestaurantActivated{id: code} = _event) do
     %{restaurant | active: true}
   end
 

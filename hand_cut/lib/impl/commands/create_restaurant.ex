@@ -9,6 +9,8 @@ defmodule HandCut.Commands.CreateRestaurant do
     :cash_only,
     :cuisine,
     :url,
+    :latitude,
+    :longitude,
     :instagram,
     :google_maps
   ]
