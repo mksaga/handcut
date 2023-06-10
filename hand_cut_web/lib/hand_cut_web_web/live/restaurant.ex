@@ -1,13 +1,14 @@
 defmodule HandCutWebWeb.RestaurantLive do
   use HandCutWebWeb, :live_view
-  alias HandCut.Projections.Restaurant
+  alias HandCut.Projections.{Certification, Restaurant}
   alias HandCutWebWeb.RestaurantResult
 
   def mount(params, %{}, socket) do
     restaurant = Restaurant.get_by_code("restaurant_" <> params["code"])
-    certification = %{type: "monitoring_agency", agency: "HMS", expires: ~D[2023-12-31]}
+    certification = Certification.get_by_restaurant(restaurant.code)
     maps_key = "AIzaSyAZA0YnVq0_j6i-W8CdTURho9JtQhDExSU"
 
+    # TODO implement
     google_maps_url = "/search"
     apple_maps_url = "/search"
 
@@ -73,15 +74,13 @@ defmodule HandCutWebWeb.RestaurantLive do
                             <ion-icon name="information-circle-outline"></ion-icon>
                             </a>
                         </p>
-                    </div>
-                    <%= if not is_nil(@certification.agency) do %>
-                        <div class="level-item">
+                    <%= if not is_nil(@certification.issuing_agency) do %>
                             <p>
-                                Certified by <%=  @certification.agency %>
-                                (exp. <%= @certification.expires %>)
+                                Certified by <%=  @certification.issuing_agency %>
+                                (exp. <%= @certification.expiration %>)
                             </p>
-                        </div>
                     <% end %>
+                        </div>
             </div>
         </div>
     </div>
