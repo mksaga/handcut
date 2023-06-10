@@ -1,6 +1,7 @@
 defmodule HandCut.Projections.Certification do
   use Ecto.Schema
-  import Ecto.Changeset
+  import Ecto.{Changeset, Query}
+  alias HandCut.Projections.Certification
 
   product_types = [
     {"Chicken", :chicken},
@@ -38,5 +39,16 @@ defmodule HandCut.Projections.Certification do
       :expiration,
       :issuing_agency
     ])
+  end
+
+  def filter_restaurants(restaurant_ids) do
+    results = "certifications"
+    |> where([c], c.restaurant_id in ^restaurant_ids)
+    |> select([c], map(c, [:code, :restaurant_id, :type, :products, :expiration, :issuing_agency]))
+    |> HandCut.Projections.Repo.all()
+  end
+
+  def get_by_restaurant(restaurant_id) do
+    HandCut.Projections.Repo.get_by(Certification, restaurant_id: restaurant_id)
   end
 end
