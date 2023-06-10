@@ -5,6 +5,7 @@ defmodule HandCut.Runtime.Server do
       HandCut.Projections.Repo,
       HandCut.Projectors.ActivationRequestProjector,
       HandCut.Projectors.RestaurantProjector,
+      HandCut.Projectors.CertificationProjector,
       HandCut.ProcessManagers.ActivationRequestProcessManager,
     ]
 
