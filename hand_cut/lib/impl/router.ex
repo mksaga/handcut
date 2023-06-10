@@ -5,9 +5,9 @@ defmodule HandCut.Router do
   alias HandCut.Commands.{ActivateRestaurant, CreateRestaurant}
   alias HandCut.Commands.{CreateCertification}
   alias HandCut.Commands.{ApproveActivationRequest, CreateActivationRequest}
-  # alias HandCut.Commands.Middleware.ValidateCommand
+  alias HandCut.Middleware.ValidateCommand
 
-  # middleware ValidateCommand
+  middleware ValidateCommand
 
   identify(Restaurant, by: :id)
   identify(Certification, by: :id)
