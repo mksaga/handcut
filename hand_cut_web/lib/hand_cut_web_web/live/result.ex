@@ -15,7 +15,10 @@ defmodule HandCutWebWeb.RestaurantResult do
             <div class="level is-mobile">
                 <div class="level-left">
                     <div>
-                      <p class="title is-4 mb-1"><%= @result.restaurant.name %></p>
+                      <p class="title is-4 mb-0">
+                        <span class="tag is-danger"><%= @result.label %></span>
+                        <%= @result.restaurant.name %>
+                      </p>
                         <%= if @result.certification != nil do %>
                           <Components.certification_label certification={@result.certification} />
                         <% end %>

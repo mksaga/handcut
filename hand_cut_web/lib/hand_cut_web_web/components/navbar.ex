@@ -43,7 +43,7 @@ defmodule HandCutWebWeb.Components do
 
   def certification_label(assigns) do
     ~H"""
-    <span class="tag is-success is-light">
+    <span class="tag is-success is-light mt-1">
       <p><%= @certification.type |> humanize_certification_type() %></p>
     </span>
     """

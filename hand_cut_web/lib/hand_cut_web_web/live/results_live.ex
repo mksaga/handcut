@@ -4,38 +4,47 @@ defmodule HandCutWebWeb.ResultsLive do
   alias HandCutWebWeb.RestaurantResult
 
   defmodule Result do
-    defstruct restaurant: Restaurant, certification: Certification
+    defstruct restaurant: Restaurant, certification: Certification, label: :string
   end
 
   def mount(params, %{}, socket) do
     restaurant_results = Restaurant.filter_search(params)
     restaurant_ids = Enum.map(restaurant_results, & &1.code)
     certifications = Certification.filter_restaurants(restaurant_ids)
+    letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
     results =
-      Enum.map(restaurant_results, fn result ->
-        %Result{restaurant: result, certification: Enum.find(certifications, &(&1.restaurant_id == result.code))}
+      Enum.with_index(restaurant_results, &{&2, &1})
+      |> Enum.map(fn {index, result} ->
+        %Result{
+          restaurant: result,
+          certification: Enum.find(certifications, &(&1.restaurant_id == result.code)),
+          label: String.at(letters, index)
+        }
       end)
 
     maps_key = "AIzaSyAZA0YnVq0_j6i-W8CdTURho9JtQhDExSU"
-
-    coords = [
-      %{lat: 40.76125737705498, lng: -73.92321132959674, label: "A"},
-      %{lat: 40.72365196768409, lng: -73.86882868726936, label: "B"}
-    ]
 
     {:ok,
      socket
      |> assign(area: params["area"])
      |> assign(cuisines: params["cuisines"])
      |> assign(:maps_key, maps_key)
-     |> assign(:results, results)
-     |> assign(coords: coords)}
+     |> assign(:results, results)}
   end
 
   def handle_event("get_restaurant_results", _value, socket) do
     results = Map.get(socket.assigns, :results)
-    coordinates = Enum.map(results, fn result -> %{lat: result.restaurant.latitude, lng: result.restaurant.longitude} end)
+
+    coordinates =
+      Enum.map(results, fn result ->
+        %{
+          lat: result.restaurant.latitude,
+          lng: result.restaurant.longitude,
+          label: result.label,
+        }
+      end)
+
     {:reply, %{results: coordinates}, socket}
   end
 
