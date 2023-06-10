@@ -51,7 +51,7 @@ defmodule HandCut.Projections.Restaurant do
     |> put_change(:active, true)
   end
 
-  def get_code(code) do
+  def get_by_code(code) do
     HandCut.Projections.Repo.get_by(Restaurant, code: code)
   end
 
