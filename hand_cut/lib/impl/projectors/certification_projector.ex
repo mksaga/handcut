@@ -20,8 +20,6 @@ defmodule HandCut.Projectors.CertificationProjector do
           %{
             code: event.id,
             restaurant_id: event.restaurant_id,
-            retailer_id: nil,
-            supplier_id: nil,
             type: event.type,
             products: event.products,
             expiration: event.expiration,

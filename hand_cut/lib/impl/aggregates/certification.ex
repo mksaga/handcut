@@ -7,8 +7,6 @@ defmodule HandCut.Aggregates.Certification do
   defstruct [
     :id,
     :restaurant_id,
-    :retailer_id,
-    :supplier_id,
     :type,
     :products,
     :expiration,
@@ -39,8 +37,6 @@ defmodule HandCut.Aggregates.Certification do
     %Certification{
       id: event.id,
       restaurant_id: event.restaurant_id,
-      retailer_id: nil,
-      supplier_id: nil,
       type: event.type,
       products: event.products,
       expiration: event.expiration,

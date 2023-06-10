@@ -5,8 +5,6 @@ defmodule HandCut.Projections.Repo.Migrations.CreateCertifications do
     create table(:certifications) do
       add :restaurant_id, :string
       add :code, :string
-      add :retailer_id, :string
-      add :supplier_id, :string
       # Ecto Enum in the schema
       add :type, :string
       # Ecto Enum in the schema

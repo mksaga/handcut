@@ -19,8 +19,6 @@ defmodule HandCut.Projections.Certification do
 
   schema "certifications" do
     field(:restaurant_id, :string)
-    field(:retailer_id, :string)
-    field(:supplier_id, :string)
     field(:code, :string)
     field(:type, Ecto.Enum, values: Enum.map(certification_types, &elem(&1, 1)))
     field(:products, {:array, Ecto.Enum}, values: Enum.map(product_types, &elem(&1, 1)))
@@ -34,8 +32,6 @@ defmodule HandCut.Projections.Certification do
     certification
     |> cast(attrs, [
       :restaurant_id,
-      :retailer_id,
-      :supplier_id,
       :type,
       :code,
       :products,
