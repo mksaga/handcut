@@ -48,7 +48,6 @@ defmodule HandCutWebWeb.RestaurantLive do
                     </p>
                 </div>
                 <div class="level-item">
-                    <!-- TODO Fix telephone link -->
                     <a href={"tel:" <> @restaurant.phone}><p><%= @restaurant.phone %></p></a>
                 </div>
             </div>
@@ -66,19 +65,17 @@ defmodule HandCutWebWeb.RestaurantLive do
         <div class="level-left">
             <div class="level">
                     <%= if not is_nil(@certification) do %>
-                    <div class="level-item">
+                    <div>
                         <p>Certification: <%= @certification.type %>
                             <!-- TODO: link to an explain page -->
                             <a href="/search">
                             <ion-icon name="information-circle-outline"></ion-icon>
                             </a>
                         </p>
-                    <%= if not is_nil(@certification.issuing_agency) do %>
                             <p>
                                 Certified by <%=  @certification.issuing_agency %>
                                 (exp. <%= @certification.expiration %>)
                             </p>
-                    <% end %>
                     </div>
                     <% end %>
             </div>
