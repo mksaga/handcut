@@ -19,8 +19,6 @@ defmodule HandCutWebWeb.RestaurantLive do
      |> assign(:maps_key, maps_key)
      |> assign(:google_maps_url, google_maps_url)
      |> assign(:apple_maps_url, apple_maps_url)
-     |> assign(:latitude, 40.761269595284915)
-     |> assign(:longitude,  -73.92330252208907)
     }
   end
 
@@ -40,7 +38,7 @@ defmodule HandCutWebWeb.RestaurantLive do
     </div>
     <div>
     <h1 class="title" phx-click="ping"><%= @restaurant.name %></h1>
-    <figure class="image is-16by9" phx-hook="RestaurantMap" id="map" data-lat={@latitude} data-long={@longitude} data-name={@restaurant.name} />
+    <figure class="image is-16by9" phx-hook="RestaurantMap" id="map" data-lat={@restaurant.latitude} data-long={@restaurant.longitude} data-name={@restaurant.name} />
     <div class="level is-mobile pt-2">
         <div class="level-left">
             <div class="level">
@@ -67,6 +65,7 @@ defmodule HandCutWebWeb.RestaurantLive do
     <div class="level is-mobile pt-2">
         <div class="level-left">
             <div class="level">
+                    <%= if not is_nil(@certification) do %>
                     <div class="level-item">
                         <p>Certification: <%= @certification.type %>
                             <!-- TODO: link to an explain page -->
@@ -80,7 +79,8 @@ defmodule HandCutWebWeb.RestaurantLive do
                                 (exp. <%= @certification.expiration %>)
                             </p>
                     <% end %>
-                        </div>
+                    </div>
+                    <% end %>
             </div>
         </div>
     </div>

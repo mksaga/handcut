@@ -85,7 +85,6 @@ function computeCenter(results) {
     return {
         lat: avgLatitude / results.length,
         lng: avgLongitude / results.length,
-
     }
 }
 
