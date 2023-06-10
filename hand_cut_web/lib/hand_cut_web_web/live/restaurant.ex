@@ -4,7 +4,7 @@ defmodule HandCutWebWeb.RestaurantLive do
   alias HandCutWebWeb.RestaurantResult
 
   def mount(params, %{}, socket) do
-    restaurant = Restaurant.get_code("restaurant_" <> params["code"])
+    restaurant = Restaurant.get_by_code("restaurant_" <> params["code"])
     certification = %{type: "monitoring_agency", agency: "HMS", expires: ~D[2023-12-31]}
     maps_key = "AIzaSyAZA0YnVq0_j6i-W8CdTURho9JtQhDExSU"
 
