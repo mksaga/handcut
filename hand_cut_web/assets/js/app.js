@@ -98,6 +98,8 @@ async function initResultsMap(results) {
   map = new Map(document.getElementById("results-map"), {
     zoom: 12,
     center: center,
+      mapTypeId: "roadmap",
+      disableDefaultUI: true,
   });
 
   await google.maps.importLibrary("marker");
