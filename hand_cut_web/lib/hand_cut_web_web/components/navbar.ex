@@ -36,4 +36,16 @@ defmodule HandCutWebWeb.Components do
     </span>
     """
   end
+
+  defp humanize_certification_type("certified_hand_slaughtered") do
+    "Certified Hand Slaughtered"
+  end
+
+  def certification_label(assigns) do
+    ~H"""
+    <span class="tag is-success is-light">
+      <p><%= @certification.type |> humanize_certification_type() %></p>
+    </span>
+    """
+  end
 end
