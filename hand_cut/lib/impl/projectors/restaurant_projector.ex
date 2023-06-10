@@ -23,6 +23,8 @@ defmodule HandCut.Projectors.RestaurantProjector do
             active: false,
             activated_at: nil,
             address: event.address,
+            latitude: event.latitude,
+            longitude: event.longitude,
             cash_only: event.cash_only,
             phone: event.phone,
             area: event.area,
