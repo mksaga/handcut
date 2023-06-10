@@ -6,6 +6,6 @@ config :nanoid,
   size: 6,
   alphabet: "0123456789abcdefghijklmnopqrstuvwxyz"
 
-import_config "#{config_env()}.exs"
-
 config :hand_cut, ecto_repos: [HandCut.Projections.Repo]
+
+import_config "#{config_env()}.exs"
