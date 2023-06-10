@@ -99,6 +99,7 @@ async function initResultsMap(results) {
     center: center,
       mapTypeId: "roadmap",
       disableDefaultUI: true,
+    zoomControl: true,
   });
 
   await google.maps.importLibrary("marker");
