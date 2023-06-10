@@ -10,36 +10,9 @@ defmodule HandCut.Events.RestaurantCreated do
     :area,
     :cuisine,
     :url,
+    :latitude,
+    :longitude,
     :instagram,
     :google_maps,
   ]
-
-  defimpl Commanded.Event.Upcaster, for: RestaurantCreated do
-    def upcast(%RestaurantCreated{} = event, _metadata) do
-      %RestaurantCreated{
-        id: id,
-        name: name,
-        address: address,
-        phone: phone,
-        area: area,
-        cuisine: cuisine,
-        url: url,
-        instagram: instagram,
-        google_maps: google_maps
-        } = event
-
-      %HandCut.Events.RestaurantCreated{
-        id: id,
-        name: name,
-        address: address,
-        phone: phone,
-        cash_only: false,
-        area: area,
-        cuisine: cuisine,
-        url: url,
-        instagram: instagram,
-        google_maps: google_maps
-        }
-    end
-  end
 end
