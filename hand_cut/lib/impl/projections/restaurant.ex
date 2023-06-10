@@ -17,6 +17,8 @@ defmodule HandCut.Projections.Restaurant do
     field(:area, Ecto.Enum, values: Areas.all_area_atoms())
     field(:cuisine, Ecto.Enum, values: Cuisines.all_cuisine_atoms())
     field(:url, :string)
+    field(:latitude, :float)
+    field(:longitude, :float)
     field(:instagram, :string)
     field(:google_maps, :string)
 
@@ -37,16 +39,33 @@ defmodule HandCut.Projections.Restaurant do
       :cuisine,
       :url,
       :instagram,
+      :latitude,
+      :longitude,
       :google_maps
     ])
+  end
+
+  def location_changeset(
+        restaurant,
+        %{latitude: latitude, longitude: longitude, address: address} = attrs
+      ) do
+    restaurant
+    |> cast(attrs, [
+      :latitude,
+      :longitude,
+      :address
+    ])
+    |> put_change(:latitude, latitude)
+    |> put_change(:longitude, longitude)
+    |> put_change(:address, address)
   end
 
   def activate_changeset(restaurant, %{activated_at: activated_at, active: true} = attrs) do
     restaurant
     |> cast(attrs, [
-          :activated_at,
-          :active
-        ])
+      :activated_at,
+      :active
+    ])
     |> put_change(:activated_at, activated_at)
     |> put_change(:active, true)
   end
@@ -56,13 +75,29 @@ defmodule HandCut.Projections.Restaurant do
   end
 
   def filter_search(params) do
-    results = "restaurants"
-    # TODO: filter on active also
-    # |> where([r], r.active == true)
-    |> filter_area(params["area"])
-    |> filter_cuisines(params["cuisines"])
-    |> select([r], map(r, [:name, :code, :address, :phone, :area, :cuisine, :url, :instagram]))
-    |> HandCut.Projections.Repo.all()
+    results =
+      "restaurants"
+      # TODO: filter on active also
+      # |> where([r], r.active == true)
+      |> filter_area(params["area"])
+      |> filter_cuisines(params["cuisines"])
+      |> select(
+        [r],
+        map(r, [
+          :name,
+          :code,
+          :address,
+          :phone,
+          :area,
+          :cuisine,
+          :url,
+          :instagram,
+          :latitude,
+          :longitude
+        ])
+      )
+      |> HandCut.Projections.Repo.all()
+
     results
   end
 

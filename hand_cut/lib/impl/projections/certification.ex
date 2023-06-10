@@ -42,7 +42,7 @@ defmodule HandCut.Projections.Certification do
   end
 
   def filter_restaurants(restaurant_ids) do
-    results = "certifications"
+    "certifications"
     |> where([c], c.restaurant_id in ^restaurant_ids)
     |> select([c], map(c, [:code, :restaurant_id, :type, :products, :expiration, :issuing_agency]))
     |> HandCut.Projections.Repo.all()
