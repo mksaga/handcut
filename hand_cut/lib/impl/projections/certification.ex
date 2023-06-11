@@ -48,6 +48,20 @@ defmodule HandCut.Projections.Certification do
     |> HandCut.Projections.Repo.all()
   end
 
+  def filter_certification_type(certification_type) do
+    "certifications"
+    |> where([c], c.certification_type == ^certification_type)
+    |> select([c], map(c, [:code, :restaurant_id, :type, :products, :expiration, :issuing_agency]))
+    |> HandCut.Projections.Repo.all()
+  end
+
+  def filter_certification_type(:all) do
+    "certifications"
+    |> HandCut.Projections.Repo.all()
+  end
+
+
+
   def get_by_restaurant(restaurant_id) do
     HandCut.Projections.Repo.get_by(Certification, restaurant_id: restaurant_id)
   end
