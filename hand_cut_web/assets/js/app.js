@@ -24,8 +24,6 @@ import "phoenix_html"
 
 let Hooks = {}
 
-// import "./google_maps.js"
-
 Hooks.RestaurantMap = {
     mounted() {
         // Pull attributes off of <figure data-*> HTML attributes
@@ -52,13 +50,17 @@ Hooks.Copy = {
       ev.preventDefault();
       let text = document.querySelector(to).dataset.value;
       navigator.clipboard.writeText(text)
+
+      // show "Copied" tag, then hide
+      copiedText = document.getElementById("copied-text");
+      copiedText.classList.remove("is-hidden");
+      setInterval(() => copiedText.classList.add("is-hidden"), 750);
     });
   },
 }
 
-
 async function initMap(latitude, longitude, name) {
-  // Request needed libraries.
+  // Request needed libraries
   const { Map } = await google.maps.importLibrary("maps");
   const position = { lat: latitude, lng: longitude };
   map = new Map(document.getElementById("map"), {
@@ -68,34 +70,23 @@ async function initMap(latitude, longitude, name) {
 
   // Add marker
   await google.maps.importLibrary("marker");
-  // The marker, positioned at Uluru
-    const simpleMarker = new google.maps.Marker({
-        position: position,
-        map,
-        title: name,
-        // label: {
-        //     text: name,
-        //     color: "#C70E20",
-        //     fontWeight: "bold"
-        // },
-        // icon: {
-        //     url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png",
-        //     labelOrigin: new google.maps.Point(68, 32),
-        //     size: new google.maps.Size(32,32),
-        //     anchor: new google.maps.Point(16,32)
-        // },
+  const simpleMarker = new google.maps.Marker({
+      position: position,
+      map,
+      title: name,
+      // label: {
+      //     text: name,
+      //     color: "#C70E20",
+      //     fontWeight: "bold"
+      // },
+      // icon: {
+      //     url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png",
+      //     labelOrigin: new google.maps.Point(68, 32),
+      //     size: new google.maps.Size(32,32),
+      //     anchor: new google.maps.Point(16,32)
+      // },
     })
 }
-
-async function copyAddress() {
-    try {
-      text = document.getElementByID("address")
-      await navigator.clipboard.writeText(text);
-      console.log('Content copied to clipboard');
-    } catch (err) {
-      console.error('Failed to copy: ', err);
-    }
-  }
 
 function computeCenter(results) {
     let avgLatitude = 0.0, avgLongitude = 0.0;
@@ -113,7 +104,7 @@ async function initResultsMap(results) {
   // Request needed libraries.
   const { Map } = await google.maps.importLibrary("maps");
 
-  // Calculate center of results
+  // Calculate center of results to center map
   const center = computeCenter(results);
   map = new Map(document.getElementById("results-map"), {
     zoom: 12,
@@ -125,7 +116,7 @@ async function initResultsMap(results) {
 
   await google.maps.importLibrary("marker");
 
-  // Add a marker for each
+  // Add a marker for each result
   let markers = new Array(results.length)
     for (i in results) {
         let position = {lat: results[i].lat, lng: results[i].lng}
