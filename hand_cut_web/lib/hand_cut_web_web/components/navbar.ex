@@ -31,7 +31,7 @@ defmodule HandCutWebWeb.Components do
 
   def cuisine_label(assigns) do
     ~H"""
-    <span class="tag is-info is-light">
+    <span class="tag is-info is-light is-rounded">
       <%= @cuisine |> String.capitalize() %>
     </span>
     """
