@@ -23,7 +23,6 @@
 import "phoenix_html"
 
 let Hooks = {}
-let map;
 
 // import "./google_maps.js"
 
@@ -46,6 +45,18 @@ Hooks.ResultsMap = {
     }
 }
 
+Hooks.Copy = {
+  mounted() {
+    let { to } = this.el.dataset;
+    this.el.addEventListener("click", (ev) => {
+      ev.preventDefault();
+      let text = document.querySelector(to).dataset.value;
+      navigator.clipboard.writeText(text)
+    });
+  },
+}
+
+
 async function initMap(latitude, longitude, name) {
   // Request needed libraries.
   const { Map } = await google.maps.importLibrary("maps");
@@ -62,19 +73,29 @@ async function initMap(latitude, longitude, name) {
         position: position,
         map,
         title: name,
-        label: {
-            text: name,
-            color: "#C70E20",
-            fontWeight: "bold"
-        },
-        icon: {
-            url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png",
-            labelOrigin: new google.maps.Point(68, 32),
-            size: new google.maps.Size(32,32),
-            anchor: new google.maps.Point(16,32)
-        },
+        // label: {
+        //     text: name,
+        //     color: "#C70E20",
+        //     fontWeight: "bold"
+        // },
+        // icon: {
+        //     url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png",
+        //     labelOrigin: new google.maps.Point(68, 32),
+        //     size: new google.maps.Size(32,32),
+        //     anchor: new google.maps.Point(16,32)
+        // },
     })
 }
+
+async function copyAddress() {
+    try {
+      text = document.getElementByID("address")
+      await navigator.clipboard.writeText(text);
+      console.log('Content copied to clipboard');
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+    }
+  }
 
 function computeCenter(results) {
     let avgLatitude = 0.0, avgLongitude = 0.0;
