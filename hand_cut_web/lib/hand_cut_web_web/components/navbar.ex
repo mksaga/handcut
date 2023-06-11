@@ -37,8 +37,19 @@ defmodule HandCutWebWeb.Components do
     """
   end
 
-  defp humanize_certification_type("certified_hand_slaughtered") do
-    "Certified Hand Slaughtered"
+  def atom_cuisine_label(assigns) do
+    ~H"""
+    <span class="tag is-info is-light">
+      <%= @cuisine |> Atom.to_string() |> String.capitalize() %>
+    </span>
+    """
+  end
+
+  defp humanize_certification_type(type) do
+    case type do
+      "certified_hand_slaughtered" -> "Certified Hand Slaughtered"
+      :certified_hand_slaughtered -> "Certified Hand Slaughtered"
+    end
   end
 
   def certification_label(assigns) do
