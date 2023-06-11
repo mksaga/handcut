@@ -2,15 +2,19 @@ defmodule HandCutWebWeb.RestaurantLive do
   use HandCutWebWeb, :live_view
   alias HandCut.Projections.{Certification, Restaurant}
   alias HandCutWebWeb.RestaurantResult
+  alias HandCutWebWeb.Components
 
   def mount(params, %{}, socket) do
     restaurant = Restaurant.get_by_code("restaurant_" <> params["code"])
     certification = Certification.get_by_restaurant(restaurant.code)
     maps_key = "AIzaSyAZA0YnVq0_j6i-W8CdTURho9JtQhDExSU"
 
-    # TODO implement
-    google_maps_url = "/search"
-    apple_maps_url = "/search"
+    lat_long_string = "#{restaurant.latitude},#{restaurant.longitude}"
+    query_string = "#{restaurant.name},#{restaurant.address}"
+
+    # TODO use Google place ID
+    google_maps_url = "https://www.google.com/maps/search/?api=1&query=#{URI.encode(query_string)}"
+    apple_maps_url = "https://maps.apple.com/?q=#{URI.encode(restaurant.name)}&sll=#{lat_long_string}"
 
     {:ok,
      socket
@@ -39,39 +43,43 @@ defmodule HandCutWebWeb.RestaurantLive do
     <div>
     <h1 class="title" phx-click="ping"><%= @restaurant.name %></h1>
     <figure class="image is-16by9" phx-hook="RestaurantMap" id="map" data-lat={@restaurant.latitude} data-long={@restaurant.longitude} data-name={@restaurant.name} />
-    <div class="level is-mobile pt-2">
+    <div class="level is-mobile pt-2 mb-1">
         <div class="level-left">
-            <div class="level">
-                <div class="level-item">
+            <div>
+                <div class="is-flex is-flex-direction-row is-align-items-center mb-1">
                     <p>
-                      <%= @restaurant.address %>
+                      <span id="address" data-value={@restaurant.address}><%= @restaurant.address %></span>
                     </p>
+                    <button class="button is-small is-rounded ml-2" phx-hook="Copy" id="copy-address" data-to="#address"><ion-icon name="copy-outline" class="ion-ionic"></ion-icon></button>
+                    <span class="tag is-info is-light ml-2 is-hidden" id="copied-text">Copied!</span>
                 </div>
-                <div class="level-item">
-                    <a href={"tel:" <> @restaurant.phone}><p><%= @restaurant.phone %></p></a>
+                <div>
+                    <a href={@google_maps_url}>
+                        <button class="button is-small is-link">Google Maps</button>
+                    </a>
+                    <a href={@apple_maps_url}>
+                        <button class="button is-small is-link">Apple Maps</button>
+                    </a>
                 </div>
             </div>
         </div>
         <div class="level-right">
             <div class="level-item">
-                <span class="tag is-primary is-light"><%= @restaurant.cuisine %></span>
+                    <Components.atom_cuisine_label cuisine={@restaurant.cuisine} />
             </div>
         </div>
     </div>
-    <div class="level is-mobile">
-        <p><a href={@google_maps_url}>google maps</a> | <a href={@apple_maps_url}>apple maps</a></p>
-    </div>
+    <a href={"tel:" <> @restaurant.phone}><p><%= @restaurant.phone %></p></a>
     <div class="level is-mobile pt-2">
         <div class="level-left">
             <div class="level">
                     <%= if not is_nil(@certification) do %>
                     <div>
-                        <p>Certification: <%= @certification.type %>
+                        <Components.certification_label certification={@certification} />
                             <!-- TODO: link to an explain page -->
                             <a href="/search">
                             <ion-icon name="information-circle-outline"></ion-icon>
                             </a>
-                        </p>
                             <p>
                                 Certified by <%=  @certification.issuing_agency %>
                                 (exp. <%= @certification.expiration %>)
