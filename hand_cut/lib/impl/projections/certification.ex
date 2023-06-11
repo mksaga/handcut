@@ -18,6 +18,10 @@ defmodule HandCut.Projections.Certification do
     {"Owner Confirmed Hand Slaughtered", :owner_confirmed_hand_slaughtered}
   ]
 
+  def certification_types() do
+    certification_types
+  end
+
   schema "certifications" do
     field(:restaurant_id, :string)
     field(:code, :string)
