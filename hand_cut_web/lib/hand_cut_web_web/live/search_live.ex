@@ -26,7 +26,7 @@ defmodule HandCutWebWeb.SearchLive do
   def mount(_params, %{}, socket) do
     {:ok,
      socket
-     |> assign(form: to_form(%{"area" => nil, "certification_type" => nil}))}
+     |> assign(form: to_form(%{"area" => :ny_brooklyn, "certification_type" => :all}))}
   end
 
   def handle_event("search", params, socket) do
