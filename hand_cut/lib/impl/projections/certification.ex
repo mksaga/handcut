@@ -70,8 +70,6 @@ defmodule HandCut.Projections.Certification do
   def filter_certification_type(query, "all") do
     query
     |> filter_expiration
-    |> select([c], map(c, [:code, :restaurant_id, :type, :products, :expiration, :issuing_agency]))
-    |> HandCut.Projections.Repo.all()
   end
 
   def filter_expiration(query) do
