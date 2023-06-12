@@ -11,9 +11,8 @@ defmodule HandCutWebWeb.Components do
             </div>
 
             <div class="level-right mr-2">
+                    <a href="/about" class="mr-2">About</a>
                     <.button href="/search" text="Search" />
-                    <.button href="/suggest" class="ml-2" text="Suggest" />
-                    <.button href="/favorites" class="ml-2" text="Favorites" />
             </div>
         </div>
     """
@@ -29,9 +28,18 @@ defmodule HandCutWebWeb.Components do
     """
   end
 
+  def cuisine_class(cuisine) do
+    color =
+      case cuisine do
+        c when c in [:thai, "thai"] -> "is-success"
+      end
+
+    "tag is-light mt-1 " <> color
+  end
+
   def cuisine_label(assigns) do
     ~H"""
-    <span class="tag is-info is-light is-rounded">
+    <span class={cuisine_class(@cuisine)}>
       <%= @cuisine |> String.capitalize() %>
     </span>
     """
@@ -39,7 +47,7 @@ defmodule HandCutWebWeb.Components do
 
   def atom_cuisine_label(assigns) do
     ~H"""
-    <span class="tag is-info is-light">
+    <span class={cuisine_class(@cuisine)}>
       <%= @cuisine |> Atom.to_string() |> String.capitalize() %>
     </span>
     """
