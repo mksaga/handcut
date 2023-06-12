@@ -1,6 +1,7 @@
 defmodule HandCutWebWeb.ResultsLive do
   use HandCutWebWeb, :live_view
   alias HandCut.Projections.{Certification, Restaurant}
+  alias HandCut.Restaurant.Areas
   alias HandCutWebWeb.RestaurantResult
 
   defmodule Result do
@@ -74,7 +75,9 @@ defmodule HandCutWebWeb.ResultsLive do
             <h1 class="title">Results</h1>
         </div>
         <div class="level-item">
-            <h2 class="subtitle"><%= length(@results) %> results in <%= @area %></h2>
+            <h2 class="subtitle">
+              <%= length(@results) %> result<%= if length(@results) != 1 do "s" end %> in <%= Areas.humanize_area(@area) %>
+            </h2>
         </div>
     </div>
 
