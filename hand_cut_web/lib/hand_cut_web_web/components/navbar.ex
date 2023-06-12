@@ -49,6 +49,8 @@ defmodule HandCutWebWeb.Components do
     case type do
       "certified_hand_slaughtered" -> "Certified Hand Slaughtered"
       :certified_hand_slaughtered -> "Certified Hand Slaughtered"
+      "certified_machine_slaughtered" -> "Certified Machine Slaughtered"
+      :certified_machine_slaughtered -> "Certified Machine Slaughtered"
     end
   end
 
