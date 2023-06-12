@@ -10,6 +10,13 @@ defmodule HandCut.Restaurant.Areas do
     Enum.reduce([Areas.nj(), Areas.ny()], fn x, acc -> x ++ acc end)
   end
 
+  def humanize_area(a) do
+    case a do
+      a when a in [:nj_newark, "nj_newark"] -> "Newark"
+      a when a in [:nj_jersey_city, "nj_jersey_city"] -> "Jersey City"
+    end
+  end
+
   def nj() do
     [
       {"(NJ) Newark", :nj_newark},
