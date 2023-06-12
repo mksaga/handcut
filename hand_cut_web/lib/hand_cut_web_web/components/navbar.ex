@@ -55,10 +55,12 @@ defmodule HandCutWebWeb.Components do
   end
 
   def certification_class(type) do
-    color = case type do
-              "certified_hand_slaughtered" -> "is-success"
-              "certified_machine_slaughtered" -> "is-warning"
-    end
+    color =
+      case type do
+        t when t in [:certified_hand_slaughtered, "certified_hand_slaughtered"] -> "is-success"
+        t when t in [:certified_machine_slaughtered, "certified_machine_slaughtered"] -> "is-warning"
+      end
+
     "tag is-light mt-1 " <> color
   end
 
