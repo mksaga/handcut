@@ -15,7 +15,7 @@ defmodule HandCut.Projections.Certification do
     {"Certified Hand Slaughtered", :certified_hand_slaughtered},
     {"Certified Machine Slaughtered", :certified_machine_slaughtered},
     {"Owner Confirmed Machine Slaughtered", :owner_confirmed_machine_slaughtered},
-    {"Owner Confirmed Hand Slaughtered", :owner_confirmed_hand_slaughtered}
+    {"Owner Confirmed Hand Slaughtered", :owner_confirmed_hand_slaughtered},
   ]
 
   schema "certifications" do
@@ -48,18 +48,26 @@ defmodule HandCut.Projections.Certification do
     |> HandCut.Projections.Repo.all()
   end
 
-  def filter_certification_type(certification_type) do
+  def filter_certification_type(certification_type) when certification_type != "all" do
     "certifications"
-    |> where([c], c.certification_type == ^certification_type)
+    |> filter_expiration
+    |> where([c], c.type == ^certification_type)
     |> select([c], map(c, [:code, :restaurant_id, :type, :products, :expiration, :issuing_agency]))
     |> HandCut.Projections.Repo.all()
   end
 
-  def filter_certification_type(:all) do
+  def filter_certification_type("all") do
     "certifications"
+    |> filter_expiration
+    |> select([c], map(c, [:code, :restaurant_id, :type, :products, :expiration, :issuing_agency]))
     |> HandCut.Projections.Repo.all()
   end
 
+  def filter_expiration(query) do
+    cutoff = Date.utc_today()
+    query
+    |> where([c], c.expiration >= ^cutoff)
+  end
 
 
   def get_by_restaurant(restaurant_id) do
