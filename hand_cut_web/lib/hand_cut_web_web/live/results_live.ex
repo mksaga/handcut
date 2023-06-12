@@ -11,11 +11,13 @@ defmodule HandCutWebWeb.ResultsLive do
     # Find restaurants in the area
     restaurant_matches = Restaurant.filter_search(params)
 
+    certification_type = params["certification_type"] || "all"
+
     # Find unexpired certifications matching those restaurants
     certifications =
       restaurant_matches
       |> Enum.map(& &1.code)
-      |> Certification.filter_search(params["certification_type"])
+      |> Certification.filter_search(certification_type)
 
     # Filter original restaurant list to those with valid certifications
     certified_restaurant_ids =
