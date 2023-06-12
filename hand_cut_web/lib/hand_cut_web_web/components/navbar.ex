@@ -54,9 +54,17 @@ defmodule HandCutWebWeb.Components do
     end
   end
 
+  def certification_class(type) do
+    color = case type do
+              "certified_hand_slaughtered" -> "is-success"
+              "certified_machine_slaughtered" -> "is-warning"
+    end
+    "tag is-light mt-1 " <> color
+  end
+
   def certification_label(assigns) do
     ~H"""
-    <span class="tag is-success is-light mt-1">
+    <span class={certification_class(@certification.type)}>
       <p><%= @certification.type |> humanize_certification_type() %></p>
     </span>
     """
