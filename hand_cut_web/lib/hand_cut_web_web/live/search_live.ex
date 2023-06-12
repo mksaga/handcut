@@ -1,11 +1,7 @@
 defmodule HandCutWebWeb.SearchLive do
   use HandCutWebWeb, :live_view
 
-<<<<<<< HEAD
-  alias HandCutWebWeb.{AreaSelect, CertSelect}
-=======
   alias HandCutWebWeb.{AreaSelect, CertificationSelect}
->>>>>>> search/certification-filter
   alias HandCut.Restaurant.{Cuisines, Areas}
 
   def cuisines() do
