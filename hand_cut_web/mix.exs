@@ -46,8 +46,8 @@ defmodule HandCutWeb.MixProject do
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
 
-      {:dart_sass, "~> 0.6", runtime: Mix.env() == :dev},
       {:bulma, "0.9.3"},
+      {:dart_sass, "~> 0.6", runtime: Mix.env() == :dev},
 
       {:hand_cut, path: "../hand_cut"}
     ]

@@ -59,6 +59,12 @@ Hooks.Copy = {
   },
 }
 
+Hooks.BackHook = {
+  mounted() {
+    this.el.addEventListener("click", (ev) => history.go(-1))
+  }
+}
+
 async function initMap(latitude, longitude, name) {
   // Request needed libraries
   const { Map } = await google.maps.importLibrary("maps");

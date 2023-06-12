@@ -30,7 +30,7 @@ defmodule HandCutWebWeb.RestaurantLive do
     ~H"""
     <div class="level">
         <button class="button">
-            <a href={Routes.results_path(@socket, :index, area: @restaurant.area)}>
+            <a phx-hook="BackHook" id="back">
                 <div class="icon-text">
                 <span class="icon">
                     <ion-icon name="arrow-back-outline" class="ion-ionic arrow-back-outline"></ion-icon>
