@@ -74,6 +74,28 @@ defmodule HandCut.Projections.Restaurant do
     HandCut.Projections.Repo.get_by(Restaurant, code: code)
   end
 
+  def get_multiple_by_code(codes) do
+     "restaurants"
+      # TODO: filter on active also
+      # |> where([r], r.active == true)
+      |> where([r], r.code in ^codes)
+      |> select(
+        [r],
+        map(r, [
+          :name,
+          :code,
+          :address,
+          :phone,
+          :area,
+          :cuisine,
+          :url,
+          :instagram,
+          :latitude,
+          :longitude
+        ]))
+      |> HandCut.Projections.Repo.all()
+  end
+
   def filter_search(params) do
     results =
       "restaurants"

@@ -8,9 +8,26 @@ defmodule HandCutWebWeb.ResultsLive do
   end
 
   def mount(params, %{}, socket) do
-    restaurant_results = Restaurant.filter_search(params)
-    restaurant_ids = Enum.map(restaurant_results, & &1.code)
-    certifications = Certification.filter_restaurants(restaurant_ids)
+    # Find restaurants in the area
+    restaurant_matches = Restaurant.filter_search(params)
+
+    # Find unexpired certifications matching those restaurants
+    certifications =
+      restaurant_matches
+      |> Enum.map(& &1.code)
+      |> Certification.filter_search(params["certification_type"])
+
+    # Filter original restaurant list to those with valid certifications
+    certified_restaurant_ids =
+      certifications
+      |> Enum.map(& &1.restaurant_id)
+
+    restaurant_results =
+      restaurant_matches
+      |> Enum.filter(fn match ->
+        Enum.any?(certifications, fn cert -> cert.restaurant_id == match.code end)
+      end)
+
     letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
     results =
@@ -41,7 +58,7 @@ defmodule HandCutWebWeb.ResultsLive do
         %{
           lat: result.restaurant.latitude,
           lng: result.restaurant.longitude,
-          label: result.label,
+          label: result.label
         }
       end)
 
@@ -59,17 +76,19 @@ defmodule HandCutWebWeb.ResultsLive do
         </div>
     </div>
 
-    <figure class="image is-4by3" id="results-map" phx-hook="ResultsMap" />
+    <%= if length(@results) > 0 do %>
+      <figure class="image is-4by3" id="results-map" phx-hook="ResultsMap" />
 
-    <div class="mt-2">
-        <%= for result <- @results do %>
-            <.live_component
-                module={RestaurantResult}
-                id={"result-#{result.restaurant.code}"}
-                result={result}}
-            />
-        <% end %>
-    </div>
+      <div class="mt-2">
+          <%= for result <- @results do %>
+              <.live_component
+                  module={RestaurantResult}
+                  id={"result-#{result.restaurant.code}"}
+                  result={result}}
+              />
+          <% end %>
+      </div>
+    <% end %>
     <script>(g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})
     ({key: "<%= @maps_key %>", v: "quarterly"});</script>
     """

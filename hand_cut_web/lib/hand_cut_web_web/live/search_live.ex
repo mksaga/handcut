@@ -1,7 +1,11 @@
 defmodule HandCutWebWeb.SearchLive do
   use HandCutWebWeb, :live_view
 
+<<<<<<< HEAD
   alias HandCutWebWeb.{AreaSelect, CertSelect}
+=======
+  alias HandCutWebWeb.{AreaSelect, CertificationSelect}
+>>>>>>> search/certification-filter
   alias HandCut.Restaurant.{Cuisines, Areas}
 
   def cuisines() do
@@ -9,9 +13,14 @@ defmodule HandCutWebWeb.SearchLive do
   end
 
   def certification_types() do
+   # TODO pull this from projection
    # types = Enum.map(HandCut.Projections.Certification.certification_types, &(elem(&1, 1)))
-   # [:all | types]
-   [:certified_hand_slaughtered]
+   # [{"All", :all} | types]
+   [
+     {"All", :all},
+     {"Hand Slaughtered", :certified_hand_slaughtered},
+     {"Machine Slaughtered", :certified_machine_slaughtered},
+   ]
   end
 
   def areas() do
@@ -21,7 +30,7 @@ defmodule HandCutWebWeb.SearchLive do
   def mount(_params, %{}, socket) do
     {:ok,
      socket
-     |> assign(form: to_form(%{"area" => nil, "certification_type" => nil}))}
+     |> assign(form: to_form(%{"area" => :ny_brooklyn, "certification_type" => :all}))}
   end
 
   def handle_event("search", params, socket) do
@@ -30,12 +39,12 @@ defmodule HandCutWebWeb.SearchLive do
     {:noreply, push_navigate(socket, to: "/results?#{query}")}
   end
 
-  def handle_event("update", %{"area" => new_area}, socket) do
-    {:noreply, assign(socket, form: %{"area" => new_area})}
+  def handle_event("update", %{"area" => new_area} = form, socket) do
+    {:noreply, assign(socket, form: %{form | "area" => new_area})}
   end
 
-  def handle_event("update", %{"certification_type" => certification_type}, socket) do
-    {:noreply, assign(socket, form: %{"certification_type" => certification_type})}
+  def handle_event("update", %{"certification_type" => certification_type} = form, socket) do
+    {:noreply, assign(socket, form: %{form | "certification_type" => certification_type})}
   end
 
   #   def handle_event("update", %{"area" => new_area, "cuisines" => new_cuisines} = revised_form, socket) do
