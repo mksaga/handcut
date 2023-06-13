@@ -5,7 +5,7 @@ defmodule HandCutWebWeb.AreaSelect do
     ~H"""
     <div class="field is-horizontal">
         <div class="field-label">
-        <label class="label">Locations</label>
+        <label class="label">Area</label>
         </div>
         <div class="field-body"
         <div class="control">

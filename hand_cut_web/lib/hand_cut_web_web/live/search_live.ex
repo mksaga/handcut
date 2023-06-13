@@ -26,7 +26,7 @@ defmodule HandCutWebWeb.SearchLive do
   def mount(_params, %{}, socket) do
     {:ok,
      socket
-     |> assign(form: to_form(%{"area" => :ny_brooklyn, "certification_type" => :all}))}
+     |> assign(form: to_form(%{"area" => :ny_brooklyn, "certification_type" => :certified_hand_slaughtered}))}
   end
 
   def handle_event("search", params, socket) do
@@ -58,8 +58,9 @@ defmodule HandCutWebWeb.SearchLive do
         </div>
         <div class="level-item">
             <h2 class="subtitle">
-                Let us know where you're looking for
-                and what you're craving.
+                Let us know where you're looking
+                and what you're craving. If you only want to see certified hand-slaughtered,
+                use the "Certification Type" filter below!
             </h2>
         </div>
 
