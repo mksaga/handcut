@@ -43,7 +43,6 @@ defmodule HandCutWebWeb.ResultsLive do
         }
       end)
 
-    maps_key = "AIzaSyAZA0YnVq0_j6i-W8CdTURho9JtQhDExSU"
 
     {:ok,
      socket

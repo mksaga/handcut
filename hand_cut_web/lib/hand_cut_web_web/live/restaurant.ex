@@ -7,7 +7,6 @@ defmodule HandCutWebWeb.RestaurantLive do
   def mount(params, %{}, socket) do
     restaurant = Restaurant.get_by_code("restaurant_" <> params["code"])
     certification = Certification.get_by_restaurant(restaurant.code)
-    maps_key = "AIzaSyAZA0YnVq0_j6i-W8CdTURho9JtQhDExSU"
 
     lat_long_string = "#{restaurant.latitude},#{restaurant.longitude}"
     query_string = "#{restaurant.name},#{restaurant.address}"
