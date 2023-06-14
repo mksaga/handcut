@@ -3,6 +3,7 @@
 
 # Secret files
 /config/*.secret.exs
+.env.*
 
 # Local certificate files
 /tmp/

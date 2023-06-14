@@ -21,10 +21,6 @@ defmodule HandCutWebWeb.ResultsLive do
       |> Certification.filter_search(certification_type)
 
     # Filter original restaurant list to those with valid certifications
-    certified_restaurant_ids =
-      certifications
-      |> Enum.map(& &1.restaurant_id)
-
     restaurant_results =
       restaurant_matches
       |> Enum.filter(fn match ->
@@ -42,6 +38,9 @@ defmodule HandCutWebWeb.ResultsLive do
           label: String.at(letters, index)
         }
       end)
+
+      maps_key = Application.get_env(:hand_cut_web, :maps_api_key)
+
 
 
     {:ok,

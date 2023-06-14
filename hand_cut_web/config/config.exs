@@ -57,4 +57,4 @@ config :dart_sass,
 import_config "#{config_env()}.exs"
 
 # Import hand_cut dependency config
-import_config "../../hand_cut/config/config.exs"
+import_config "../../hand_cut/config/runtime.exs"

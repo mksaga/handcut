@@ -11,6 +11,8 @@ defmodule HandCutWebWeb.RestaurantLive do
     lat_long_string = "#{restaurant.latitude},#{restaurant.longitude}"
     query_string = "#{restaurant.name},#{restaurant.address}"
 
+    maps_key = Application.get_env(:hand_cut_web, :maps_api_key)
+
     # TODO use Google place ID
     google_maps_url = "https://www.google.com/maps/search/?api=1&query=#{URI.encode(query_string)}"
     apple_maps_url = "https://maps.apple.com/?q=#{URI.encode(restaurant.name)}&sll=#{lat_long_string}"
