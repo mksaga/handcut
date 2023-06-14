@@ -20,8 +20,7 @@ if System.get_env("PHX_SERVER") do
   config :hand_cut_web, HandCutWebWeb.Endpoint, server: true
 end
 
-config :hand_cut_web, :maps_api_key,     System.fetch_env!("MAPS_API_KEY")
-
+config :hand_cut_web, :maps_api_key, System.fetch_env!("MAPS_API_KEY")
 
 if config_env() == :prod do
   # The secret key base is used to sign/encrypt cookies and other secrets.
@@ -51,21 +50,21 @@ if config_env() == :prod do
     ],
     secret_key_base: secret_key_base
 
-#   # ## Configuring the mailer
-#   #
-#   # In production you need to configure the mailer to use a different adapter.
-#   # Also, you may need to configure the Swoosh API client of your choice if you
-#   # are not using SMTP. Here is an example of the configuration:
-#   #
-#   #     config :hand_cut_web, HandCutWeb.Mailer,
-#   #       adapter: Swoosh.Adapters.Mailgun,
-#   #       api_key: System.get_env("MAILGUN_API_KEY"),
-#   #       domain: System.get_env("MAILGUN_DOMAIN")
-#   #
-#   # For this example you need include a HTTP client required by Swoosh API client.
-#   # Swoosh supports Hackney and Finch out of the box:
-#   #
-#   #     config :swoosh, :api_client, Swoosh.ApiClient.Hackney
-#   #
-#   # See https://hexdocs.pm/swoosh/Swoosh.html#module-installation for details.
+  #   # ## Configuring the mailer
+  #   #
+  #   # In production you need to configure the mailer to use a different adapter.
+  #   # Also, you may need to configure the Swoosh API client of your choice if you
+  #   # are not using SMTP. Here is an example of the configuration:
+  #   #
+  #   #     config :hand_cut_web, HandCutWeb.Mailer,
+  #   #       adapter: Swoosh.Adapters.Mailgun,
+  #   #       api_key: System.get_env("MAILGUN_API_KEY"),
+  #   #       domain: System.get_env("MAILGUN_DOMAIN")
+  #   #
+  #   # For this example you need include a HTTP client required by Swoosh API client.
+  #   # Swoosh supports Hackney and Finch out of the box:
+  #   #
+  #   #     config :swoosh, :api_client, Swoosh.ApiClient.Hackney
+  #   #
+  #   # See https://hexdocs.pm/swoosh/Swoosh.html#module-installation for details.
 end
