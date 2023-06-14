@@ -17,8 +17,8 @@ defmodule HandCutWebWeb.Router do
   scope "/", HandCutWebWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
     get "/about", PageController, :about
+    live "/", SearchLive, :index
     live "/search", SearchLive, :index
     live "/results", ResultsLive, :index
     live "/rest/:code", RestaurantLive, :show
