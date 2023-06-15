@@ -2,6 +2,9 @@ import Config
 
 config :hand_cut_web, :maps_api_key, System.fetch_env!("MAPS_API_KEY")
 
+# Use Jason for JSON parsing in Phoenix
+config :phoenix, :json_library, Jason
+
 # Configures the endpoint
 config :hand_cut_web, HandCutWebWeb.Endpoint,
   url: [host: "localhost"],
@@ -36,8 +39,6 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
-# Use Jason for JSON parsing in Phoenix
-config :phoenix, :json_library, Jason
 
 config :dart_sass,
   version: "1.61.0",
