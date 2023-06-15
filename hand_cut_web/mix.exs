@@ -48,6 +48,7 @@ defmodule HandCutWeb.MixProject do
 
       {:bulma, "0.9.3"},
       {:dart_sass, "~> 0.6", runtime: Mix.env() == :dev},
+      {:site_encrypt, "~> 0.5"},
 
       {:hand_cut, path: "../hand_cut"}
     ]

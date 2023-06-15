@@ -13,7 +13,7 @@ defmodule HandCutWeb.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: HandCutWeb.PubSub},
       # Start the Endpoint (http/https)
-      HandCutWebWeb.Endpoint
+      {SiteEncrypt.Phoenix, HandCutWebWeb.Endpoint}
       # Start a worker by calling: HandCutWeb.Worker.start_link(arg)
       # {HandCutWeb.Worker, arg}
     ]
