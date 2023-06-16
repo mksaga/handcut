@@ -58,7 +58,7 @@ config :hand_cut_web, HandCutWebWeb.Endpoint,
   # Binding to loopback ipv4 address prevents access from other machines.
   # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
   http: [port: 4000, ip: {127, 0, 0, 1} ],
-  https: [port: System.get_env("HTTPS_PORT")],
+  https: [port: 4040],
   check_origin: false,
   code_reloader: true,
   debug_errors: true,

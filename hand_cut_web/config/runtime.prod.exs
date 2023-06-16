@@ -31,32 +31,21 @@ secret_key_base =
 host = System.get_env("PHX_HOST") || "example.com"
 port = String.to_integer(System.get_env("HTTP_PORT") || "4000")
 
-config :hand_cut_web, HandCutWebWeb.Endpoint,
-  url: [host: host, port: 443, scheme: "https"],
-  http: [
-    # Enable IPv6 and bind on all interfaces.
-    # Set it to  {0, 0, 0, 0, 0, 0, 0, 1} for local network only access.
-    # See the documentation on https://hexdocs.pm/plug_cowboy/Plug.Cowboy.html
-    # for details about using IPv6 vs IPv4 and loopback vs public addresses.
-    ip: {0, 0, 0, 0, 0, 0, 0, 0},
-    port: port
-  ],
-  secret_key_base: secret_key_base
 
-#   # ## Configuring the mailer
-#   #
-#   # In production you need to configure the mailer to use a different adapter.
-#   # Also, you may need to configure the Swoosh API client of your choice if you
-#   # are not using SMTP. Here is an example of the configuration:
-#   #
-#   #     config :hand_cut_web, HandCutWeb.Mailer,
-#   #       adapter: Swoosh.Adapters.Mailgun,
-#   #       api_key: System.get_env("MAILGUN_API_KEY"),
-#   #       domain: System.get_env("MAILGUN_DOMAIN")
-#   #
-#   # For this example you need include a HTTP client required by Swoosh API client.
-#   # Swoosh supports Hackney and Finch out of the box:
-#   #
-#   #     config :swoosh, :api_client, Swoosh.ApiClient.Hackney
-#   #
-#   # See https://hexdocs.pm/swoosh/Swoosh.html#module-installation for details.
+config :hand_cut_web, HandCutWebWeb.Endpoint,
+  url: [host: "handcut.net", port: 443],
+  cache_static_manifest: "priv/static/cache_manifest.json",
+  server: true,
+  force_ssl: [hsts: true],
+  http: [port: 4000, transport_options: [socket_opts: [:inet6]]],
+  https: [
+    port: 4040,
+    cipher_suite: :strong,
+    transport_options: [socket_opts: [:inet6]]
+  ]
+
+# Set path to cert folder
+config :hand_cut_web, :cert_path, "/home/mohamedaly/site_encrypt_db"
+
+# Set the cert mode so site_encrypt knows to hit live LetsEncrypt
+config :hand_cut_web, :cert_mode, "production"
