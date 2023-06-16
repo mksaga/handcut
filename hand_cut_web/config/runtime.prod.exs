@@ -39,7 +39,7 @@ config :hand_cut_web, HandCutWebWeb.Endpoint,
   url: [host: "handcut.net", port: 443],
   cache_static_manifest: "priv/static/cache_manifest.json",
   live_view: [signing_salt: Application.compile_env(:hand_cut_web, :live_view_signing_salt)],
-  secret_key_base: Application.compile_env(:hand_cut_web, :secret_key_base)
+  secret_key_base: Application.compile_env(:hand_cut_web, :secret_key_base),
   server: true,
   force_ssl: [hsts: true],
   http: [port: 4000, transport_options: [socket_opts: [:inet6]]],
