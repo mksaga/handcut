@@ -49,3 +49,5 @@ config :hand_cut_web, :cert_path, "/home/mohamedaly/site_encrypt_db"
 
 # Set the cert mode so site_encrypt knows to hit live LetsEncrypt
 config :hand_cut_web, :cert_mode, "production"
+
+config :dart_sass, :version, "1.61.0"
