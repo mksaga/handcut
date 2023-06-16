@@ -22,4 +22,3 @@ config :hand_cut, HandCut.Projections.Repo,
   database: System.fetch_env!("DB_NAME_PROJECTIONS"),
   hostname: "localhost",
   pool_size: 10
-
