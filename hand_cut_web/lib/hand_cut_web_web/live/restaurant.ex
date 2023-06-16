@@ -1,7 +1,6 @@
 defmodule HandCutWebWeb.RestaurantLive do
   use HandCutWebWeb, :live_view
   alias HandCut.Projections.{Certification, Restaurant}
-  alias HandCutWebWeb.RestaurantResult
   alias HandCutWebWeb.Components
 
   def mount(params, %{}, socket) do
