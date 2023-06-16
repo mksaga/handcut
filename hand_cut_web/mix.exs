@@ -38,7 +38,7 @@ defmodule HandCutWeb.MixProject do
       {:phoenix_live_view, "~> 0.18.18"},
       {:floki, ">= 0.30.0", only: :test},
       {:phoenix_live_dashboard, "~> 0.7.2"},
-      {:esbuild, "~> 0.4", runtime: Mix.env() == :dev},
+      {:esbuild, "~> 0.5", runtime: Mix.env() == :dev},
       {:swoosh, "~> 1.3"},
       {:hackney, "~> 1.9"},
       {:telemetry_metrics, "~> 0.6"},
