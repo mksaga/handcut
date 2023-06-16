@@ -3,6 +3,7 @@ import Config
 config :hand_cut_web, :maps_api_key, System.fetch_env!("MAPS_API_KEY")
 config :hand_cut_web, :live_view_signing_salt, System.fetch_env!("LIVE_VIEW_SIGNING_SALT")
 
+IO.inspect Application.get_env(:hand_cut_web, :live_view_signing_salt)
 
 # ## Using releases
 #
