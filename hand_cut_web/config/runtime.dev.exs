@@ -3,6 +3,7 @@ import Config
 
 
 config :hand_cut_web, :maps_api_key, System.fetch_env!("MAPS_API_KEY")
+config :hand_cut_web, :live_view_signing_salt, System.fetch_env!("LIVE_VIEW_SIGNING_SALT")
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
@@ -12,7 +13,7 @@ config :hand_cut_web, HandCutWebWeb.Endpoint,
   url: [host: "localhost"],
   render_errors: [view: HandCutWebWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: HandCutWeb.PubSub,
-  live_view: [signing_salt: "q8HuSBW7"]
+  live_view: [signing_salt: Application.get_env(:hand_cut_web, :live_view_signing_salt)]
 
 # Configures the mailer
 #
