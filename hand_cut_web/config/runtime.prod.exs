@@ -36,7 +36,7 @@ port = String.to_integer(System.get_env("HTTP_PORT") || "4000")
 config :hand_cut_web, HandCutWebWeb.Endpoint,
   url: [host: "handcut.net", port: 443],
   cache_static_manifest: "priv/static/cache_manifest.json",
-  live_view: [signing_salt: Application.get_env(:hand_cut_web, :live_view_signing_salt)]
+  live_view: [signing_salt: Application.get_env(:hand_cut_web, :live_view_signing_salt)],
   server: true,
   force_ssl: [hsts: true],
   http: [port: 4000, transport_options: [socket_opts: [:inet6]]],
