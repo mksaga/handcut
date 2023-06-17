@@ -5,6 +5,8 @@ import Config
 config :hand_cut_web, :maps_api_key, System.fetch_env!("MAPS_API_KEY")
 config :hand_cut_web, :live_view_signing_salt, System.fetch_env!("LIVE_VIEW_SIGNING_SALT")
 
+config :esbuild, version: "0.14.41"
+
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
@@ -26,16 +28,6 @@ config :hand_cut_web, HandCutWeb.Mailer, adapter: Swoosh.Adapters.Local
 
 # Swoosh API client is needed for adapters other than SMTP.
 config :swoosh, :api_client, false
-
-# Configure esbuild (the version is required)
-config :esbuild,
-  version: "0.14.29",
-  default: [
-    args:
-      ~w(js/app.js --bundle --target=es2017 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
-    cd: Path.expand("../assets", __DIR__),
-    env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
-  ]
 
 # Configures Elixir's Logger
 config :logger, :console,

@@ -4,7 +4,7 @@ config :hand_cut_web, :maps_api_key, System.fetch_env!("MAPS_API_KEY")
 config :hand_cut_web, :live_view_signing_salt, System.fetch_env!("LIVE_VIEW_SIGNING_SALT")
 config :hand_cut_web, :secret_key_base, System.fetch_env!("SECRET_KEY_BASE")
 
-IO.inspect Application.compile_env(:hand_cut_web, :live_view_signing_salt)
+config :esbuild, version: "0.14.41"
 
 # ## Using releases
 #
@@ -55,4 +55,10 @@ config :hand_cut_web, :cert_path, "/home/mohamedaly/site_encrypt_db"
 # Set the cert mode so site_encrypt knows to hit live LetsEncrypt
 config :hand_cut_web, :cert_mode, "production"
 
-config :dart_sass, :version, "1.61.0"
+config :dart_sass,
+  version: "1.61.0",
+  default: [
+    # args: ~w(css/app.scss ../priv/static/assets/app.css),
+    args: ~w(--load-path=../deps/bulma css:../priv/static/assets),
+    cd: Path.expand("../assets", __DIR__)
+  ]
