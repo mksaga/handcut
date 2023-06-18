@@ -15,6 +15,8 @@ defmodule HandCut.Repo.Migrations.CreateRestaurants do
       # Ecto Enum in the schema
       add :cuisine, :string
       add :url, :string
+      add :latitude, :float
+      add :longitude, :float
       add :instagram, :string
       add :google_maps, :string
     end
