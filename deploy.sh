@@ -24,14 +24,14 @@ cd /home/mohamedaly/handcut/hand_cut
 source .env.prod
 cd /home/mohamedaly/handcut/hand_cut_web
 source .env.prod
-color_prompt "🌲 Environment variables loaded!" 
+color_prompt "🌲 Environment variables loaded!"
 
-color_prompt "… Installing dependencies" 
+color_prompt "… Installing dependencies"
 
 cd /home/mohamedaly/handcut/hand_cut_web
 # Install dependencies
 mix deps.get --only prod
-color_prompt "✅ Pull complete!" 
+color_prompt "✅ Pull complete!"
 
 # Optional CI steps
 # mix test
@@ -47,15 +47,15 @@ color_prompt "✅ Pull complete!"
 
 # Identify the currently running release
 current_release=$(ls ../releases | sort -nr | head -n 1)
-color_prompt "Current release: ${current_release}" 
+color_prompt "Current release: ${current_release}"
 now_in_unix_seconds=$(date +'%s')
 if [[ $current_release == '' ]]; then current_release=$now_in_unix_seconds; fi
 
 # Create release
-color_prompt "… Generating release" 
+color_prompt "… Generating release"
 pwd
 mix release --path ../releases/${now_in_unix_seconds}
-color_prompt "✅ Release ${now_in_unix_seconds} generated!" 
+color_prompt "✅ Release ${now_in_unix_seconds} generated!"
 
 # Get the HTTP_PORT variable from the currently running release
 source ../releases/${current_release}/releases/0.1.0/env.sh
@@ -69,7 +69,7 @@ else
   https=4040
   old_port=4001
 fi
-color_prompt "⚓️ Swappin over from port ${old_port} to ${http_port}/${https_port}" 
+color_prompt "⚓️ Swappin over from port ${old_port} to ${http_port}/${https_port}"
 
 
 # Put env vars with the ports to forward to, and set non-conflicting node name
@@ -83,11 +83,11 @@ touch ../env_vars
 echo "RELEASE=${now_in_unix_seconds}" >> ../env_vars
 
 # Run migrations
-color_prompt "… Running ecto migrations" 
+color_prompt "… Running ecto migrations"
 cd /home/mohamedaly/handcut/hand_cut
 mix ecto.migrate
 cd /home/mohamedaly/handcut
-color_prompt "✅ Ecto migrations complete!" 
+color_prompt "✅ Ecto migrations complete!"
 
 # Boot the new version of the app
 echo "… Booting new version of app"
