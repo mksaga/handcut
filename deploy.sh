@@ -12,6 +12,7 @@ echo "✅ Pull complete!"
 cd /home/mohamedaly/handcut/hand_cut
 source .env.prod
 cd /home/mohamedaly/handcut/hand_cut_web
+source .env.prod
 echo "🌲 Environment variables loaded!"
 
 echo "… Installing dependencies"
