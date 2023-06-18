@@ -3,24 +3,35 @@
 # Exit immediately on errors
 set -e
 
+# Color setup
+RED='\033[0;31m'
+PURPLE='\033[0;35m'
+NC='\033[0m' # No Color
+
+color_prompt () {
+    echo -en "${PURPLE}"
+    echo $1
+    echo -en "${NC}"
+}
+
 # Pull latest code
 cd /home/mohamedaly/handcut
 git fetch
 git reset --hard origin/main
-echo "✅ Pull complete!"
+color_prompt("✅ Pull complete!")
 
 cd /home/mohamedaly/handcut/hand_cut
 source .env.prod
 cd /home/mohamedaly/handcut/hand_cut_web
 source .env.prod
-echo "🌲 Environment variables loaded!"
+color_prompt("🌲 Environment variables loaded!")
 
-echo "… Installing dependencies"
+color_prompt("… Installing dependencies")
 
 cd /home/mohamedaly/handcut/hand_cut_web
 # Install dependencies
 mix deps.get --only prod
-echo "✅ Pull complete!"
+color_prompt("✅ Pull complete!")
 
 # Optional CI steps
 # mix test
@@ -30,19 +41,21 @@ echo "✅ Pull complete!"
 export MIX_ENV=prod
 
 cd /home/mohamedaly/handcut/hand_cut_web
-echo "… Generating assets"
+color_prompt("… Generating assets")
 mix assets.deploy
-echo "✅ Pull complete!"
+color_prompt("✅ Pull complete!")
 
 # Identify the currently running release
 current_release=$(ls ../releases | sort -nr | head -n 1)
+color_prompt("Current release: ${current_release}")
 now_in_unix_seconds=$(date +'%s')
 if [[ $current_release == '' ]]; then current_release=$now_in_unix_seconds; fi
 
 # Create release
-echo "… Generating release"
+color_prompt("… Generating release")
+pwd
 mix release --path ../releases/${now_in_unix_seconds}
-echo "✅ Release ${now_in_unix_seconds} generated!"
+color_prompt("✅ Release ${now_in_unix_seconds} generated!")
 
 # Get the HTTP_PORT variable from the currently running release
 source ../releases/${current_release}/releases/0.1.0/env.sh
@@ -56,7 +69,7 @@ else
   https=4040
   old_port=4001
 fi
-echo "⚓️ Swappin over from port ${old_port} to ${http_port}/${https_port}"
+color_prompt("⚓️ Swappin over from port ${old_port} to ${http_port}/${https_port}")
 
 
 # Put env vars with the ports to forward to, and set non-conflicting node name
@@ -70,11 +83,11 @@ touch ../env_vars
 echo "RELEASE=${now_in_unix_seconds}" >> ../env_vars
 
 # Run migrations
-echo "… Running ecto migrations"
+color_prompt("… Running ecto migrations")
 cd /home/mohamedaly/handcut/hand_cut
 mix ecto.migrate
 cd /home/mohamedaly/handcut
-echo "✅ Ecto migrations complete!"
+color_prompt("✅ Ecto migrations complete!")
 
 # Boot the new version of the app
 echo "… Booting new version of app"
