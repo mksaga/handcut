@@ -9,6 +9,9 @@ git fetch
 git reset --hard origin/main
 echo "✅ Pull complete!"
 
+source .env.prod
+echo "🌲 Environment variables loaded!"
+
 echo "… Installing dependencies"
 
 cd /home/mohamedaly/handcut/hand_cut_web
