@@ -18,7 +18,7 @@ color_prompt () {
 cd /home/mohamedaly/handcut
 git fetch
 git reset --hard origin/main
-color_prompt("✅ Pull complete!")
+color_prompt("Pull complete!")
 
 cd /home/mohamedaly/handcut/hand_cut
 source .env.prod
