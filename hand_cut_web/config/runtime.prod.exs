@@ -32,7 +32,8 @@ secret_key_base =
     """
 
 host = System.get_env("PHX_HOST") || "example.com"
-port = String.to_integer(System.get_env("HTTP_PORT") || "4000")
+http_port = String.to_integer(System.get_env("HTTP_PORT") || "4000")
+https_port = String.to_integer(System.get_env("HTTPS_PORT") || "4040")
 
 
 config :hand_cut_web, HandCutWebWeb.Endpoint,
@@ -42,9 +43,9 @@ config :hand_cut_web, HandCutWebWeb.Endpoint,
   secret_key_base: Application.compile_env(:hand_cut_web, :secret_key_base),
   server: true,
   force_ssl: [hsts: true],
-  http: [port: 4000, transport_options: [socket_opts: [:inet6]]],
+  http: [port: http_port, transport_options: [socket_opts: [:inet6]]],
   https: [
-    port: 4040,
+    port: https_port,
     cipher_suite: :strong,
     transport_options: [socket_opts: [:inet6]]
   ]
