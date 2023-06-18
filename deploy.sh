@@ -78,9 +78,11 @@ echo "export HTTPS_PORT=${https}" >> ../releases/${now_in_unix_seconds}/releases
 echo "export RELEASE_NAME=${http}" >> ../releases/${now_in_unix_seconds}/releases/0.1.0/env.sh
 
 # Set the release to the new version
+pwd
 rm ../env_vars || true
 touch ../env_vars
 echo "RELEASE=${now_in_unix_seconds}" >> ../env_vars
+color_prompt "Env vars created 👍"
 
 # Run migrations
 color_prompt "… Running ecto migrations"
@@ -90,14 +92,14 @@ cd /home/mohamedaly/handcut
 color_prompt "✅ Ecto migrations complete!"
 
 # Boot the new version of the app
-echo "… Booting new version of app"
+color_prompt "… Booting new version of app"
 sudo systemctl start hand_cut_web@${http}
 # Wait for the new version to boot
 until $(curl --output /dev/null --silent --head --fail   localhost:${http}); do
   echo 'Waiting for app to boot...'
   sleep 1
 done
-echo "✅ New app replied to liveness check"
+color_prompt "✅ New app replied to liveness check"
 
 # Switch forwarding of ports 443 and 80 to the ones the new app is listening on
 sudo iptables -t nat -R PREROUTING 1 -p tcp --dport 80 -j REDIRECT --to-port ${http}
@@ -108,4 +110,4 @@ sudo systemctl stop hand_cut_web@${old_port}
 # Just in case the old version was started by systemd after a server
 # reboot, also stop the server_reboot version
 sudo systemctl stop hand_cut_web@server_reboot
-echo '🚢 Deployed!'
+color_prompt '🚢 Deployed!'
