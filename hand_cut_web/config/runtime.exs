@@ -12,6 +12,7 @@ case config_env() do
     Code.require_file("runtime.dev.exs", "config")
   :test -> Code.require_file("runtime.test.exs", "config")
   :prod ->
+    # systemd executes from "/" in production, so specify full absolute path
     Code.require_file("runtime.exs", "/home/mohamedaly/handcut/hand_cut/config")
     Code.require_file("runtime.prod.exs", "/home/mohamedaly/handcut/hand_cut_web/config")
 end

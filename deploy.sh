@@ -4,12 +4,14 @@
 set -e
 
 # Color setup
-RED='\033[0;31m'
+BLACK='\033[0;30m'
+CYAN='\033[0;36m'
 PURPLE='\033[0;35m'
+RED='\033[0;31m'
 NC='\033[0m' # No Color
 
 color_prompt () {
-    echo -en "${PURPLE}"
+    echo -en "${CYAN}"
     echo $1
     echo -en "${NC}"
 }
@@ -20,11 +22,11 @@ git fetch
 git reset --hard origin/main
 color_prompt "✅ Pull complete!"
 
-cd /home/mohamedaly/handcut/hand_cut
-source .env.prod
-cd /home/mohamedaly/handcut/hand_cut_web
-source .env.prod
-color_prompt "🌲 Environment variables loaded!"
+# cd /home/mohamedaly/handcut/hand_cut
+# source .env.prod
+# cd /home/mohamedaly/handcut/hand_cut_web
+# source .env.prod
+# color_prompt "🌲 Environment variables loaded!"
 
 color_prompt "… Installing dependencies"
 
@@ -53,7 +55,6 @@ if [[ $current_release == '' ]]; then current_release=$now_in_unix_seconds; fi
 
 # Create release
 color_prompt "… Generating release"
-pwd
 mix release --path ../releases/${now_in_unix_seconds}
 color_prompt "✅ Release ${now_in_unix_seconds} generated!"
 
@@ -83,11 +84,10 @@ cat .env.prod >> ../releases/${now_in_unix_seconds}/releases/0.1.0/env.sh
 cat ../hand_cut/.env.prod >> ../releases/${now_in_unix_seconds}/releases/0.1.0/env.sh
 
 # Set the release to the new version
-pwd
 rm ../env_vars || true
 touch ../env_vars
 echo "RELEASE=${now_in_unix_seconds}" >> ../env_vars
-color_prompt "Env vars created 👍"
+color_prompt "👍 Env vars created"
 
 # Run migrations
 # color_prompt "… Running ecto migrations"
