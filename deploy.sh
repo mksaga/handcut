@@ -31,7 +31,7 @@ color_prompt "… Installing dependencies"
 cd /home/mohamedaly/handcut/hand_cut_web
 # Install dependencies
 mix deps.get --only prod
-color_prompt "✅ Pull complete!"
+color_prompt "✅ Dependencies installed!"
 
 # Optional CI steps
 # mix test
@@ -43,7 +43,7 @@ export MIX_ENV=prod
 cd /home/mohamedaly/handcut/hand_cut_web
 color_prompt "… Generating assets" 
 mix assets.deploy
-color_prompt "✅ Pull complete!" 
+color_prompt "✅ Assets generated!"
 
 # Identify the currently running release
 current_release=$(ls ../releases | sort -nr | head -n 1)
@@ -85,11 +85,11 @@ echo "RELEASE=${now_in_unix_seconds}" >> ../env_vars
 color_prompt "Env vars created 👍"
 
 # Run migrations
-color_prompt "… Running ecto migrations"
-cd /home/mohamedaly/handcut/hand_cut
-mix ecto.migrate
-cd /home/mohamedaly/handcut
-color_prompt "✅ Ecto migrations complete!"
+# color_prompt "… Running ecto migrations"
+# cd /home/mohamedaly/handcut/hand_cut
+# MIX_ENV=prod mix ecto.migrate
+# cd /home/mohamedaly/handcut
+# color_prompt "✅ Ecto migrations complete!"
 
 # Boot the new version of the app
 color_prompt "… Booting new version of app"
