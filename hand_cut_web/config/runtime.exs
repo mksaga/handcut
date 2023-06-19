@@ -6,8 +6,6 @@ import Config
 # and secrets from environment variables or elsewhere. Do not define
 # any compile-time configuration in here, as it won't be applied.
 
-IO.inspect File.cwd()
-
 case config_env() do
   :dev ->
     Code.require_file("runtime.exs", "./hand_cut/config")
@@ -15,5 +13,5 @@ case config_env() do
   :test -> Code.require_file("runtime.test.exs", "config")
   :prod ->
     Code.require_file("runtime.exs", "/home/mohamedaly/handcut/hand_cut/config")
-    Code.require_file("runtime.prod.exs", "config")
+    Code.require_file("runtime.prod.exs", "/home/mohamedaly/handcut/hand_cut_web/config")
 end
