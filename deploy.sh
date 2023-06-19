@@ -79,6 +79,10 @@ echo "export HTTP_PORT=${http}" >> ../releases/${now_in_unix_seconds}/releases/0
 echo "export HTTPS_PORT=${https}" >> ../releases/${now_in_unix_seconds}/releases/0.1.0/env.sh
 echo "export RELEASE_NAME=${http}" >> ../releases/${now_in_unix_seconds}/releases/0.1.0/env.sh
 
+# Copy env variables into release
+cat .env.prod >> ../releases/${now_in_unix_seconds}/releases/0.1.0/env.sh
+cat ../hand_cut/.env.prod >> ../releases/${now_in_unix_seconds}/releases/0.1.0/env.sh
+
 # Set the release to the new version
 pwd
 rm ../env_vars || true
