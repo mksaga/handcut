@@ -3,6 +3,7 @@ defmodule HandCutWebWeb.ResultsLive do
   alias HandCut.Projections.{Certification, Restaurant}
   alias HandCut.Restaurant.Areas
   alias HandCutWebWeb.RestaurantResult
+  alias HandCutWebWeb.Components
 
   defmodule Result do
     defstruct restaurant: Restaurant, certification: Certification, label: :string
@@ -41,13 +42,17 @@ defmodule HandCutWebWeb.ResultsLive do
 
       maps_key = Application.get_env(:hand_cut_web, :maps_api_key)
 
-
+      title_prefix = case Components.humanize_certification_type(certification_type) do
+        "All" -> "All Certified"
+        x -> x
+      end
+      page_title = "#{title_prefix} Restaurants in #{Areas.humanize_area(params["area"])}"
 
     {:ok,
      socket
      |> assign(area: params["area"])
-     |> assign(cuisines: params["cuisines"])
      |> assign(:maps_key, maps_key)
+     |> assign(:page_title, page_title)
      |> assign(:results, results)}
   end
 

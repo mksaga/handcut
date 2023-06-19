@@ -21,6 +21,7 @@ defmodule HandCutWebWeb.RestaurantLive do
      |> assign(:restaurant, restaurant)
      |> assign(:certification, certification)
      |> assign(:maps_key, maps_key)
+     |> assign(:page_title, restaurant.name)
      |> assign(:google_maps_url, google_maps_url)
      |> assign(:apple_maps_url, apple_maps_url)
     }

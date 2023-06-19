@@ -53,12 +53,16 @@ defmodule HandCutWebWeb.Components do
     """
   end
 
-  defp humanize_certification_type(type) do
+  def humanize_certification_type(type) do
     case type do
       "certified_hand_slaughtered" -> "Certified Hand Slaughtered"
       :certified_hand_slaughtered -> "Certified Hand Slaughtered"
       "certified_machine_slaughtered" -> "Certified Machine Slaughtered"
       :certified_machine_slaughtered -> "Certified Machine Slaughtered"
+      :all -> "All"
+        t when t in [:certified_hand_slaughtered, "certified_hand_slaughtered"] -> "Certified Hand Slaughtered"
+        t when t in [:certified_machine_slaughtered, "certified_machine_slaughtered"] -> "Certified Machine Slaughtered"
+        t when t in [:all, "all"] -> "All"
     end
   end
 

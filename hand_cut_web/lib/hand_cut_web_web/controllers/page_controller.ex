@@ -5,6 +5,6 @@ defmodule HandCutWebWeb.PageController do
     render(conn, "index.html")
   end
   def about(conn, _params) do
-    render(conn, "about.html")
+    render(conn, "about.html", page_title: "About")
   end
 end
