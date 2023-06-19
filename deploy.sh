@@ -58,7 +58,9 @@ mix release --path ../releases/${now_in_unix_seconds}
 color_prompt "✅ Release ${now_in_unix_seconds} generated!"
 
 # Get the HTTP_PORT variable from the currently running release
+cat ../releases/${current_release}/releases/0.1.0/env.sh
 source ../releases/${current_release}/releases/0.1.0/env.sh
+
 if [[ $HTTP_PORT == '4000' ]]
 then
   http=4001
@@ -69,7 +71,7 @@ else
   https=4040
   old_port=4001
 fi
-color_prompt "⚓️ Swappin over from port ${old_port} to ${http_port}/${https_port}"
+color_prompt "⚓️ Swappin over from port ${old_port} to ${http}/${https}"
 
 
 # Put env vars with the ports to forward to, and set non-conflicting node name
