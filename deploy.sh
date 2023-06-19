@@ -22,11 +22,12 @@ git fetch
 git reset --hard origin/main
 color_prompt "✅ Pull complete!"
 
-# cd /home/mohamedaly/handcut/hand_cut
-# source .env.prod
-# cd /home/mohamedaly/handcut/hand_cut_web
-# source .env.prod
-# color_prompt "🌲 Environment variables loaded!"
+# This is necessary for config to compile
+cd /home/mohamedaly/handcut/hand_cut
+source .env.prod
+cd /home/mohamedaly/handcut/hand_cut_web
+source .env.prod
+color_prompt "🌲 Environment variables loaded!"
 
 color_prompt "… Installing dependencies"
 
