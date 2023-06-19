@@ -58,7 +58,6 @@ mix release --path ../releases/${now_in_unix_seconds}
 color_prompt "✅ Release ${now_in_unix_seconds} generated!"
 
 # Get the HTTP_PORT variable from the currently running release
-cat ../releases/${current_release}/releases/0.1.0/env.sh
 source ../releases/${current_release}/releases/0.1.0/env.sh
 
 if [[ $HTTP_PORT == '4000' ]]
@@ -99,6 +98,7 @@ color_prompt "Env vars created 👍"
 
 # Boot the new version of the app
 color_prompt "… Booting new version of app"
+cat ../env_vars
 sudo systemctl start hand_cut_web@${http}
 # Wait for the new version to boot
 until $(curl --output /dev/null --silent --head --fail   localhost:${http}); do
