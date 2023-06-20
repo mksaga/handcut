@@ -39,7 +39,7 @@ defmodule HandCut.Projectors.ActivationRequestProjector do
           HandCut.Projections.Repo.get_by(ActivationRequest, restaurant_code: code),
           %{
             restaurant_code: code,
-            approved: false
+            approved: true
           }
         )
       )
