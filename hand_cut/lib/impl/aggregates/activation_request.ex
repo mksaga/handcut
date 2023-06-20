@@ -6,7 +6,7 @@ defmodule HandCut.Aggregates.ActivationRequest do
 
   alias HandCut.Aggregates.ActivationRequest
   alias HandCut.Commands.{CreateActivationRequest, ApproveActivationRequest}
-  alias HandCut.Events.{ActivationRequestApproved, ActivationRequestCreated, RestaurantCreated}
+  alias HandCut.Events.{ActivationRequestApproved, ActivationRequestCreated, RestaurantCreated, RestaurantActivated}
 
   # Public API
 
