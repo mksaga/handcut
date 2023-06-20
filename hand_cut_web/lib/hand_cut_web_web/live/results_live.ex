@@ -86,7 +86,7 @@ defmodule HandCutWebWeb.ResultsLive do
 
     <%= if length(@results) > 0 do %>
       <div class="container is-max-desktop mt-2">
-        <figure class="image is-4by3" id="results-map" phx-hook="ResultsMap" />
+        <figure class="image is-4by3" id="results-map" phx-hook="ResultsMap" phx-update="ignore" />
       </div>
 
       <div class="container is-max-desktop mt-2">
