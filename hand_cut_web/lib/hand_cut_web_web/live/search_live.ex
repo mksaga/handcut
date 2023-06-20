@@ -63,7 +63,7 @@ defmodule HandCutWebWeb.SearchLive do
             </h2>
         </div>
 
-        <.form for={@form} let={f} phx-change="update" phx-submit="search">
+        <.form for={@form} :let={f} phx-change="update" phx-submit="search">
                 <.live_component module={AreaSelect} id="area-select" options={areas()} form={f}/>
                 <.live_component module={CertificationSelect} id="area-select" options={certification_types()} form={f}/>
 

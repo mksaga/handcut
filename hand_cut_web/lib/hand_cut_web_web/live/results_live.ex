@@ -73,7 +73,7 @@ defmodule HandCutWebWeb.ResultsLive do
 
   def render(assigns) do
     ~H"""
-    <div class="level">
+    <div class="container">
         <div class="level-item">
             <h1 class="title">Results</h1>
         </div>
@@ -85,9 +85,11 @@ defmodule HandCutWebWeb.ResultsLive do
     </div>
 
     <%= if length(@results) > 0 do %>
-      <figure class="image is-4by3" id="results-map" phx-hook="ResultsMap" />
+      <div class="container is-max-desktop mt-2">
+        <figure class="image is-4by3" id="results-map" phx-hook="ResultsMap" />
+      </div>
 
-      <div class="mt-2">
+      <div class="container is-max-desktop mt-2">
           <%= for result <- @results do %>
               <.live_component
                   module={RestaurantResult}
