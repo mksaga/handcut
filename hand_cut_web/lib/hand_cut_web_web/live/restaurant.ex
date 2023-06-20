@@ -41,7 +41,8 @@ defmodule HandCutWebWeb.RestaurantLive do
             </a>
         </button>
     </div>
-    <div>
+
+    <div class="container is-max-desktop">
     <h1 class="title" phx-click="ping"><%= @restaurant.name %></h1>
     <figure class="image is-16by9" phx-hook="RestaurantMap" id="map" data-lat={@restaurant.latitude} data-long={@restaurant.longitude} data-name={@restaurant.name} />
     <div class="level is-mobile pt-2 mb-1">
