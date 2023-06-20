@@ -15,7 +15,7 @@ defmodule HandCutWebWeb.RestaurantResult do
             <div class="level is-mobile">
                 <div class="level-left">
                     <div>
-                      <p class="title is-4 mb-0">
+                      <p class="title is-5 mb-0">
                         <span class="tag is-danger"><%= @result.label %></span>
                         <%= @result.restaurant.name %>
                       </p>
