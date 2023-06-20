@@ -81,6 +81,18 @@ defmodule HandCutWebWeb.ResultsLive do
             <h2 class="subtitle">
               <%= length(@results) %> result<%= if length(@results) != 1 do "s" end %> in <%= Areas.humanize_area(@area) %>
             </h2>
+            </div>
+            <div class="level-item">
+            <h2>
+            <a phx-hook="BackHook" id="back" phx-update="ignore">
+              <div class="icon-text">
+                <span class="icon">
+                    <ion-icon name="arrow-back-outline" class="ion-ionic arrow-back-outline"></ion-icon>
+                </span>
+            <span>Back to search</span>
+              </div>
+            </a>
+            </h2>
         </div>
     </div>
 
