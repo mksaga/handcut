@@ -32,6 +32,9 @@ defmodule HandCutWebWeb.Components do
     color =
       case cuisine do
         c when c in [:thai, "thai"] -> "is-success"
+        c when c in [:bengali, "bengali"] -> "is-success"
+        c when c in [:indian, "indian"] -> "is-warning"
+        c when c in [:chinese, "chinese"] -> "is-danger"
       end
 
     "tag is-light mt-1 " <> color
