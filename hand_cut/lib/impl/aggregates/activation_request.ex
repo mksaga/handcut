@@ -74,4 +74,13 @@ defmodule HandCut.Aggregates.ActivationRequest do
       ) do
     %{activation_req | approved: true}
   end
+
+  # Do nothing
+  def apply(
+        %ActivationRequest{restaurant_code: code} = activation_req,
+        %RestaurantActivated{} = event
+      ) do
+    activation_req
+  end
+
 end
