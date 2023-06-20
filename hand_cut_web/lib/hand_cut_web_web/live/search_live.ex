@@ -53,32 +53,23 @@ defmodule HandCutWebWeb.SearchLive do
   # <.live_component module={CuisineSelect} id="cuisine-select" options={cuisines()} form={f}/>
   def render(assigns) do
     ~H"""
-    <div class="level">
-        <div class="level-item">
+    <div class="container is-flex is-flex-direction-column is-align-items-center">
+        <div>
             <h1 class="title">Welcome to HandCut!</h1>
         </div>
-        <div class="level-item">
+        <div>
             <h2 class="subtitle">
                 Find certified hand- or machine-slaughtered restaurants below.
             </h2>
         </div>
 
         <.form for={@form} let={f} phx-change="update" phx-submit="search">
-            <div class="level-item">
                 <.live_component module={AreaSelect} id="area-select" options={areas()} form={f}/>
-            </div>
-
-            <div class="level-item">
                 <.live_component module={CertificationSelect} id="area-select" options={certification_types()} form={f}/>
-            </div>
 
-            <div class="level-item">
-                <div class="field">
-                    <div class="control">
-                        <%= submit "Search", class: "button is-link" %>
-                    </div>
-                </div>
-            </div>
+                        <div class="field">
+                        <%= submit "Search", class: "button is-link mx-6" %>
+                        </div>
         </.form>
 
         </div>
