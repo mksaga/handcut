@@ -85,6 +85,11 @@ defmodule HandCut.Aggregates.Restaurant do
     %{restaurant | active: true}
   end
 
+  # Nothing to do here! Process manager will handle
+  def apply(%Restaurant{id: code} = restaurant, %ActivationRequestApproved{restaurant_code: code}) do
+    restaurant
+  end
+
   # Nothing to do here!
   def apply(%Restaurant{id: code} = restaurant, %ActivationRequestCreated{restaurant_code: code}) do
     restaurant
