@@ -31,7 +31,7 @@ defmodule HandCutWebWeb.RestaurantLive do
     ~H"""
     <div class="level">
         <button class="button">
-            <a phx-hook="BackHook" id="back">
+            <a phx-hook="BackHook" id="back" phx-update="ignore">
                 <div class="icon-text">
                 <span class="icon">
                     <ion-icon name="arrow-back-outline" class="ion-ionic arrow-back-outline"></ion-icon>
@@ -52,7 +52,7 @@ defmodule HandCutWebWeb.RestaurantLive do
                     <p>
                       <span id="address" data-value={@restaurant.address}><%= @restaurant.address %></span>
                     </p>
-                    <button class="button is-small is-rounded ml-2" phx-hook="Copy" id="copy-address" data-to="#address"><ion-icon name="copy-outline" class="ion-ionic"></ion-icon></button>
+                    <button class="button is-small is-rounded ml-2" phx-hook="Copy" id="copy-address" data-to="#address" phx-update="ignore"><ion-icon name="copy-outline" class="ion-ionic"></ion-icon></button>
                     <span class="tag is-info is-light ml-2 is-hidden" id="copied-text">Copied!</span>
                 </div>
                 <div>
