@@ -19,7 +19,7 @@ defmodule HandCut.Aggregates.Restaurant do
   alias HandCut.Aggregates.Restaurant
   alias HandCut.Commands.{ActivateRestaurant, CreateRestaurant}
   alias HandCut.Events.{RestaurantCreated, RestaurantActivated}
-  alias HandCut.Events.{ActivationRequestCreated}
+  alias HandCut.Events.{ActivationRequestCreated, ActivationRequestApproved}
 
   # Public API
 
