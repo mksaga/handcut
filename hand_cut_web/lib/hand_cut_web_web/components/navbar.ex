@@ -35,6 +35,7 @@ defmodule HandCutWebWeb.Components do
         c when c in [:bengali, "bengali"] -> "is-success"
         c when c in [:indian, "indian"] -> "is-warning"
         c when c in [:chinese, "chinese"] -> "is-danger"
+        c when c in [:american, "american"] -> "is-danger"
       end
 
     "tag is-light mt-1 " <> color
