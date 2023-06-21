@@ -10,7 +10,7 @@ defmodule HandCut.Restaurant.Cuisines do
     Enum.reduce(
       [
         Cuisines.east_asian(),
-        Cuisines.american(),
+        Cuisines.other(),
         Cuisines.southeast_asian()
       ], fn x, acc -> x ++ acc end)
   end
