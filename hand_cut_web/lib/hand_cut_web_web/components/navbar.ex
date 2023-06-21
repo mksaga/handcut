@@ -11,7 +11,7 @@ defmodule HandCutWebWeb.Components do
             </div>
 
             <div class="level-right mr-2">
-                    <a href="/about" class="mr-2">About</a>
+                    <.button href="/about" text="About" class="mr-2" />
                     <.button href="/search" text="Search" />
             </div>
         </div>
@@ -21,7 +21,7 @@ defmodule HandCutWebWeb.Components do
   def button(assigns) do
     ~H"""
     <a href={@href} class={Map.get(assigns, :class, "")}>
-          <button class="button is-small is-link is-light">
+          <button class="button is-link is-light">
           <%= @text %>
           </button>
       </a>
