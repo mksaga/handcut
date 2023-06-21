@@ -58,6 +58,7 @@ defmodule HandCutWebWeb.ResultsLive do
 
   def handle_event("get_restaurant_results", _value, socket) do
     results = Map.get(socket.assigns, :results)
+    area = Map.get(socket.assigns, :area)
 
     coordinates =
       Enum.map(results, fn result ->
@@ -68,7 +69,7 @@ defmodule HandCutWebWeb.ResultsLive do
         }
       end)
 
-    {:reply, %{results: coordinates}, socket}
+    {:reply, %{results: coordinates, area: area}, socket}
   end
 
   def render(assigns) do

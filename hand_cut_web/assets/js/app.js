@@ -38,7 +38,7 @@ Hooks.ResultsMap = {
     mounted() {
         // Pull results from socket state
         this.pushEvent("get_restaurant_results", {}, (serverReply) => {
-            initResultsMap(serverReply.results);
+            initResultsMap(serverReply.results, serverReply.area);
       });
     }
 }
@@ -106,14 +106,28 @@ function computeCenter(results) {
     }
 }
 
-async function initResultsMap(results) {
+function getZoomLevel(area) {
+  const DEFAULT_ZOOM_LEVEL = 12
+  let customZoomLevels = {
+    "ny_manhattan": 14,
+  }
+  if (area in customZoomLevels) {
+    return customZoomLevels[area]
+  }
+  return DEFAULT_ZOOM_LEVEL
+}
+
+async function initResultsMap(results, area) {
   // Request needed libraries.
   const { Map } = await google.maps.importLibrary("maps");
 
   // Calculate center of results to center map
   const center = computeCenter(results);
+
+  zoomLevel = getZoomLevel(area);
+
   map = new Map(document.getElementById("results-map"), {
-    zoom: 12,
+    zoom: zoomLevel,
     center: center,
       mapTypeId: "roadmap",
       disableDefaultUI: true,
