@@ -7,6 +7,7 @@ defmodule HandCut.MixProject do
       version: "0.1.0",
       elixir: "~> 1.14",
       start_permanent: Mix.env() == :prod,
+      aliases: aliases(),
       deps: deps()
     ]
   end
@@ -16,6 +17,12 @@ defmodule HandCut.MixProject do
     [
       mod: { HandCut.Runtime.Application, [] },
       extra_applications: [:logger]
+    ]
+  end
+
+  defp aliases do
+    [
+      reset: ["event_store.drop", "event_store.create", "event_store.init"]
     ]
   end
 
