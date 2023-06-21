@@ -13,7 +13,6 @@ defmodule HandCut.Restaurant.Areas do
   def humanize_area(a) do
     case a do
       a when a in [:nj_newark, "nj_newark"] -> "Newark"
-      a when a in [:nj_paramus, "nj_paramus"] -> "Paramus"
       a when a in [:nj_paterson, "nj_paterson"] -> "Paterson"
       a when a in [:nj_jersey_city, "nj_jersey_city"] -> "Jersey City"
       a when a in [:nj_hackensack, "nj_hackensack"] -> "Hackensack"
@@ -25,7 +24,6 @@ defmodule HandCut.Restaurant.Areas do
   def nj() do
     [
       {"(NJ) Newark", :nj_newark},
-      {"(NJ) Paramus", :nj_paramus},
       {"(NJ) Hackensack", :nj_hackensack},
       {"(NJ) Paterson", :nj_paterson},
       {"(NJ) Jersey City", :nj_jersey_city},
