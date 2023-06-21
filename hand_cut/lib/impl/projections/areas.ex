@@ -18,6 +18,7 @@ defmodule HandCut.Restaurant.Areas do
       a when a in [:nj_hackensack, "nj_hackensack"] -> "Hackensack"
       a when a in [:ny_brooklyn, "ny_brooklyn"] -> "Brooklyn"
       a when a in [:tx_irving, "tx_irving"] -> "Irving"
+      _ -> ""
     end
   end
 

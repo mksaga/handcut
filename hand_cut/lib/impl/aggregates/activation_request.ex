@@ -12,7 +12,7 @@ defmodule HandCut.Aggregates.ActivationRequest do
 
   def execute(
         %ActivationRequest{restaurant_code: nil},
-        %CreateActivationRequest{restaurant_code: code} = command
+        %CreateActivationRequest{restaurant_code: code}
       ) do
     event = %ActivationRequestCreated{
       restaurant_code: code
@@ -21,9 +21,10 @@ defmodule HandCut.Aggregates.ActivationRequest do
     {:ok, event}
   end
 
+  # Existing activation request - no events to return here
   def execute(
         %ActivationRequest{restaurant_code: code},
-        %CreateActivationRequest{restaurant_code: code} = command
+        %CreateActivationRequest{restaurant_code: code}
       ) do
     {:ok, []}
   end
@@ -31,7 +32,7 @@ defmodule HandCut.Aggregates.ActivationRequest do
   # TODO: figure out what is going on here?
   def execute(
         nil,
-        %CreateActivationRequest{restaurant_code: code} = command
+        %CreateActivationRequest{restaurant_code: code}
       ) do
     event = %ActivationRequestCreated{
       restaurant_code: code
@@ -48,7 +49,7 @@ defmodule HandCut.Aggregates.ActivationRequest do
 
   # State Mutators
 
-  def apply(%ActivationRequest{}, %ActivationRequestCreated{restaurant_code: code} = event) do
+  def apply(%ActivationRequest{}, %ActivationRequestCreated{restaurant_code: code}) do
     %ActivationRequest{
       restaurant_code: code,
       approved: false
@@ -56,7 +57,7 @@ defmodule HandCut.Aggregates.ActivationRequest do
   end
 
   # TODO: figure out what is going on here?
-  def apply(nil, %ActivationRequestCreated{restaurant_code: code} = event) do
+  def apply(nil, %ActivationRequestCreated{restaurant_code: code}) do
     %ActivationRequest{
       restaurant_code: code,
       approved: false
