@@ -107,7 +107,7 @@ function computeCenter(results) {
 }
 
 function getZoomLevel(area) {
-  const DEFAULT_ZOOM_LEVEL = 12
+  const DEFAULT_ZOOM_LEVEL = 13
   let customZoomLevels = {
     "ny_manhattan": 13,
     "nj_paterson": 13,
