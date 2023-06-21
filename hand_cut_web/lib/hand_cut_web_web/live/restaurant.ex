@@ -47,26 +47,28 @@ defmodule HandCutWebWeb.RestaurantLive do
     <div class="container is-max-desktop">
     <h1 class="title" phx-click="ping"><%= @restaurant.name %></h1>
     <figure class="image is-16by9" phx-hook="RestaurantMap" id="map" data-lat={@restaurant.latitude} data-long={@restaurant.longitude} data-name={@restaurant.name} />
-    <div class="level is-mobile pt-2 mb-1">
-        <div class="level-left">
-            <div>
-                <div class="is-flex is-flex-direction-row is-align-items-center mb-1">
-                    <p>
-                      <span id="address" data-value={@restaurant.address}><%= @restaurant.address %></span>
-                    </p>
-                    <button class="button is-small is-rounded ml-2" phx-hook="Copy" id="copy-address" data-to="#address" phx-update="ignore"><ion-icon name="copy-outline" class="ion-ionic"></ion-icon></button>
-                    <span class="tag is-info is-light ml-2 is-hidden" id="copied-text">Copied!</span>
-                </div>
-                <div>
-                    <a href={@google_maps_url}>
-                        <button class="button is-small is-link">Google Maps</button>
-                    </a>
-                    <a href={@apple_maps_url}>
-                        <button class="button is-small is-link">Apple Maps</button>
-                    </a>
-                </div>
-            </div>
+    <div class="pt-2 mb-1">
+        <div class="is-flex is-flex-direction-row is-align-items-center mb-1">
+            <p>
+                <span id="address" data-value={@restaurant.address} class="is-size-7"><%= @restaurant.address %></span>
+            </p>
+            <button class="button is-small is-rounded ml-2" phx-hook="Copy" id="copy-address" data-to="#address" phx-update="ignore"><ion-icon name="copy-outline" class="ion-ionic"></ion-icon></button>
+            <span class="tag is-info is-light ml-2 is-hidden" id="copied-text">Copied!</span>
         </div>
+        <div>
+
+        </div>
+    </div>
+    <div class="level is-mobile mb-1">
+        <div class="level-left">
+            <a href={@google_maps_url}>
+                    <button class="button is-small is-link">Google Maps</button>
+            </a>
+            <a href={@apple_maps_url}>
+                <button class="button is-small is-link ml-1">Apple Maps</button>
+            </a>
+        </div>
+
         <div class="level-right">
             <div class="level-item">
                     <Components.atom_cuisine_label cuisine={@restaurant.cuisine} />
