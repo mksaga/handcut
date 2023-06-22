@@ -1,7 +1,7 @@
 defmodule HandCut.Projectors.RestaurantProjector do
 
   alias HandCut.Projections.Restaurant
-  alias HandCut.Events.{RestaurantCreated, RestaurantActivated}
+  alias HandCut.Events.{RestaurantCreated, RestaurantActivated, RestaurantUpdated}
 
   use Commanded.Projections.Ecto,
     application: HandCut.Runtime.App,
@@ -22,6 +22,33 @@ defmodule HandCut.Projectors.RestaurantProjector do
             code: event.id,
             active: false,
             activated_at: nil,
+            address: event.address,
+            latitude: event.latitude,
+            longitude: event.longitude,
+            cash_only: event.cash_only,
+            phone: event.phone,
+            area: event.area,
+            cuisine: event.cuisine,
+            url: event.url,
+            instagram: event.instagram,
+            google_maps: event.google_maps
+          }
+        )
+      )
+    end
+  )
+
+  project(
+    %RestaurantUpdated{id: code} = event,
+    _metadata,
+    fn multi ->
+      Ecto.Multi.update(
+        multi,
+        :restaurant,
+        Restaurant.update_changeset(
+          HandCut.Projections.Repo.get_by(Restaurant, code: code),
+          %{
+            name: event.name,
             address: event.address,
             latitude: event.latitude,
             longitude: event.longitude,

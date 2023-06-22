@@ -17,8 +17,8 @@ defmodule HandCut.Aggregates.Restaurant do
   ]
 
   alias HandCut.Aggregates.Restaurant
-  alias HandCut.Commands.{ActivateRestaurant, CreateRestaurant}
-  alias HandCut.Events.{RestaurantCreated, RestaurantActivated}
+  alias HandCut.Commands.{ActivateRestaurant, CreateRestaurant, UpdateRestaurant}
+  alias HandCut.Events.{RestaurantCreated, RestaurantActivated, RestaurantUpdated}
   alias HandCut.Events.{ActivationRequestCreated, ActivationRequestApproved}
 
   # Public API
@@ -39,6 +39,21 @@ defmodule HandCut.Aggregates.Restaurant do
       google_maps: command.google_maps,
     }
 
+    {:ok, event}
+  end
+
+  # Only populate fields that actually changed
+  def execute(%Restaurant{id: id} = restaurant, %UpdateRestaurant{} = command) do
+    event = %RestaurantUpdated{id: id}
+    |> Map.replace(:name, command.name)
+    |> Map.replace(:address, command.address)
+    |> Map.replace(:phone, command.phone)
+    |> Map.replace(:cash_only, command.cash_only)
+    |> Map.replace(:area, command.area)
+    |> Map.replace(:cuisine, command.cuisine)
+    |> Map.replace(:latitude, command.latitude)
+    |> Map.replace(:longitude, command.longitude)
+    |> Map.replace(:instagram, command.instagram)
     {:ok, event}
   end
 
@@ -67,6 +82,25 @@ defmodule HandCut.Aggregates.Restaurant do
       name: event.name,
       id: event.id,
       active: false,
+      activated_at: nil,
+      address: event.address,
+      phone: event.phone,
+      cash_only: event.cash_only,
+      area: event.area,
+      cuisine: event.cuisine,
+      url: event.url,
+      latitude: event.latitude,
+      longitude: event.longitude,
+      instagram: event.instagram,
+      google_maps: event.google_maps,
+    }
+  end
+
+  def apply(%Restaurant{id: id} = restaurant, %RestaurantUpdated{} = event) do
+    %Restaurant{
+      name: event.name,
+      id: id,
+      active: restaurant.active,
       activated_at: nil,
       address: event.address,
       phone: event.phone,

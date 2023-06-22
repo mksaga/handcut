@@ -45,6 +45,32 @@ defmodule HandCut.Projections.Restaurant do
     ])
   end
 
+  def update_changeset(restaurant, attrs) do
+    restaurant
+    |> cast(attrs, [
+      :name,
+      :cash_only,
+      :address,
+      :phone,
+      :area,
+      :cuisine,
+      :url,
+      :instagram,
+      :latitude,
+      :longitude,
+    ])
+    |> put_change(:name, attrs.name || restaurant.name)
+    |> put_change(:cash_only, attrs.cash_only || restaurant.cash_only)
+    |> put_change(:address, attrs.address || restaurant.address)
+    |> put_change(:phone, attrs.phone || restaurant.phone)
+    |> put_change(:area, attrs.area || restaurant.area)
+    |> put_change(:cuisine, attrs.cuisine || restaurant.cuisine)
+    |> put_change(:url, attrs.url || restaurant.url)
+    |> put_change(:instagram, attrs.instagram || restaurant.instagram)
+    |> put_change(:latitude, attrs.latitude || restaurant.latitude)
+    |> put_change(:longitude, attrs.longitude || restaurant.longitude)
+  end
+
   def location_changeset(
         restaurant,
         %{latitude: latitude, longitude: longitude, address: address} = attrs

@@ -6,7 +6,7 @@ defmodule HandCut.Runtime.Server do
       HandCut.Projectors.ActivationRequestProjector,
       HandCut.Projectors.RestaurantProjector,
       HandCut.Projectors.CertificationProjector,
-      HandCut.ProcessManagers.ActivationRequestProcessManager,
+      # HandCut.ProcessManagers.ActivationRequestProcessManager,
     ]
 
     opts = [strategy: :one_for_one, name: HandCut.Supervisor]
