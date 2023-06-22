@@ -78,10 +78,7 @@ defmodule HandCutWebWeb.ResultsLive do
         ({key: "<%= @maps_key %>", v: "beta"});</script>
     <div class="container">
         <div class="level-item">
-            <h1 class="title">Results</h1>
-        </div>
-        <div class="level-item">
-            <h2 class="subtitle">
+            <h2 class="title is-4">
               <%= length(@results) %> result<%= if length(@results) != 1 do "s" end %> in <%= Areas.humanize_area(@area) %>
             </h2>
             </div>
