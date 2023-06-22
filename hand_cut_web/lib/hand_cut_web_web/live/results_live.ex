@@ -59,6 +59,7 @@ defmodule HandCutWebWeb.ResultsLive do
   def handle_event("get_restaurant_results", _value, socket) do
     results = Map.get(socket.assigns, :results)
     area = Map.get(socket.assigns, :area)
+    maps_key = Map.get(socket.assigns, :maps_key)
 
     coordinates =
       Enum.map(results, fn result ->
@@ -69,7 +70,7 @@ defmodule HandCutWebWeb.ResultsLive do
         }
       end)
 
-    {:reply, %{results: coordinates, area: area}, socket}
+    {:reply, %{results: coordinates, area: area, key: maps_key}, socket}
   end
 
   def render(assigns) do
@@ -99,7 +100,7 @@ defmodule HandCutWebWeb.ResultsLive do
     </div>
 
     <%= if length(@results) > 0 do %>
-      <div class="container is-max-desktop mt-2">
+      <div class="container is-max-desktop mt-2" id="map-container" phx-update="ignore">
         <figure class="image is-4by3" id="results-map" phx-hook="ResultsMap" phx-update="ignore" />
       </div>
 
