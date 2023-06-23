@@ -112,6 +112,7 @@ function getZoomLevel(area) {
     "ny_manhattan": 13,
     "nj_paterson": 13,
     "nj_jersey_city": 13,
+    "ny_queens": 11,
   }
   if (area in customZoomLevels) {
     return customZoomLevels[area]
