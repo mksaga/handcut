@@ -144,6 +144,7 @@ defmodule HandCut.Projections.Restaurant do
           :longitude
         ])
       )
+      |> order_by([r], r.name)
       |> HandCut.Projections.Repo.all()
 
     results
