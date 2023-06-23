@@ -89,14 +89,12 @@ defmodule HandCutWebWeb.ResultsLive do
                 </div>
             </a>
         </button>
+      <div class="level-item mt-2 mb-0">
+        <h2 class="title is-4">
+          <%= length(@results) %> result<%= if length(@results) != 1 do "s" end %> in <%= Areas.humanize_area(@area) %>
+        </h2>
       </div>
-        <div class="level-item">
-            <h2 class="title is-4">
-              <%= length(@results) %> result<%= if length(@results) != 1 do "s" end %> in <%= Areas.humanize_area(@area) %>
-            </h2>
-            </div>
-            <div class="level-item">
-        </div>
+      </div>
     </div>
 
     <%= if length(@results) > 0 do %>
