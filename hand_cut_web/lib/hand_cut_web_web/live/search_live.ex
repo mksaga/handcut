@@ -21,6 +21,7 @@ defmodule HandCutWebWeb.SearchLive do
 
   def areas() do
     Areas.all_areas()
+    |> Enum.sort()
   end
 
   def mount(_params, %{}, socket) do
