@@ -19,6 +19,7 @@ defmodule HandCut.Restaurant.Cuisines do
   def other() do
     [
       {"American", :american}
+      {"Mexican", :mexican}
     ]
   end
 
