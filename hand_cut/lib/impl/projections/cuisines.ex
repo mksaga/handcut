@@ -18,8 +18,8 @@ defmodule HandCut.Restaurant.Cuisines do
 
   def other() do
     [
-      {"American", :american}
-      {"Mexican", :mexican}
+      {"American", :american},
+      {"Mexican", :mexican},
     ]
   end
 
@@ -32,7 +32,7 @@ defmodule HandCut.Restaurant.Cuisines do
   def middle_eastern() do
     [
       {"Turkish", :turkish},
-      {"Middle Eastern", :middle_eastern}
+      {"Middle Eastern", :middle_eastern},
     ]
   end
 
