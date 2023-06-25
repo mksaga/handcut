@@ -35,6 +35,10 @@ defmodule HandCutWebWeb.Components do
         c when c in [:bengali, "bengali"] -> "is-success"
         c when c in [:indian, "indian"] -> "is-warning"
         c when c in [:chinese, "chinese"] -> "is-danger"
+        c when c in [:chinese, "chinese"] -> "is-danger"
+        c when c in [:afghani, "afghani"] -> "is-danger"
+        c when c in [:turkish, "turkish"] -> "is-danger"
+        c when c in [:middle_eastern, "middle_eastern"] -> "is-danger"
         c when c in [:american, "american"] -> "is-danger"
       end
 

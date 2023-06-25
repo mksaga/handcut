@@ -20,7 +20,9 @@ defmodule HandCutWebWeb.SearchLive do
   end
 
   def areas() do
+    excluded_areas = [:nj_newark, "nj_newark"]
     Areas.all_areas()
+    |> Enum.filter(fn x -> not Enum.member?(excluded_areas, x) end)
     |> Enum.sort()
   end
 
@@ -65,12 +67,11 @@ defmodule HandCutWebWeb.SearchLive do
         </div>
 
         <.form for={@form} :let={f} phx-change="update" phx-submit="search">
-                <.live_component module={AreaSelect} id="area-select" options={areas()} form={f}/>
-                <.live_component module={CertificationSelect} id="area-select" options={certification_types()} form={f}/>
-
-                        <div class="field">
-                        <%= submit "Search", class: "button is-link mx-6" %>
-                        </div>
+          <.live_component module={AreaSelect} id="area-select" options={areas()} form={f}/>
+          <.live_component module={CertificationSelect} id="area-select" options={certification_types()} form={f}/>
+          <div class="field">
+            <%= submit "Search", class: "button is-link mx-6" %>
+          </div>
         </.form>
 
         </div>

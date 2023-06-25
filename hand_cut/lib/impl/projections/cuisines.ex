@@ -11,6 +11,7 @@ defmodule HandCut.Restaurant.Cuisines do
       [
         Cuisines.east_asian(),
         Cuisines.other(),
+        Cuisines.middle_eastern(),
         Cuisines.southeast_asian()
       ], fn x, acc -> x ++ acc end)
   end
@@ -27,11 +28,19 @@ defmodule HandCut.Restaurant.Cuisines do
     ]
   end
 
+  def middle_eastern() do
+    [
+      {"Turkish", :turkish},
+      {"Middle Eastern", :middle_eastern}
+    ]
+  end
+
   def southeast_asian() do
     [
       {"Bengali", :bengali},
       {"Thai", :thai},
       {"Pakistani", :pakistani},
+      {"Afghani", :afghani},
       {"Indian", :indian},
     ]
   end
