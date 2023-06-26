@@ -26,6 +26,7 @@ defmodule HandCut.Restaurant.Cuisines do
   def east_asian() do
     [
       {"Chinese", :chinese},
+      {"Uyghur", :uyghur},
     ]
   end
 
