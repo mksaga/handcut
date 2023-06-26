@@ -62,8 +62,8 @@ defmodule HandCutWebWeb.SearchLive do
             <h1 class="title">Welcome to HandCut!</h1>
         </div>
         <div>
-            <h2 class="subtitle">
-                Find certified hand- or machine-slaughtered restaurants below.
+            <h2 class="subtitle mt-2 mb-2">
+                Find certified hand-slaughtered halal restaurants on an easy-to-use map.
             </h2>
         </div>
 
