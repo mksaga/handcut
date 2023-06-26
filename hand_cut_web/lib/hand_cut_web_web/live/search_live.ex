@@ -13,9 +13,9 @@ defmodule HandCutWebWeb.SearchLive do
    # types = Enum.map(HandCut.Projections.Certification.certification_types, &(elem(&1, 1)))
    # [{"All", :all} | types]
    [
-     {"All", :all},
+     # {"All", :all},
      {"Hand Slaughtered", :certified_hand_slaughtered},
-     {"Machine Slaughtered", :certified_machine_slaughtered},
+     # {"Machine Slaughtered", :certified_machine_slaughtered},
    ]
   end
 
