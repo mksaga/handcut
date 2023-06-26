@@ -94,6 +94,9 @@ defmodule HandCutWebWeb.ResultsLive do
           <%= length(@results) %> result<%= if length(@results) != 1 do "s" end %> in <%= Areas.humanize_area(@area) %>
         </h2>
       </div>
+        <div class="level-item">
+          <p>if map is not appearing below, refresh!</p>
+        </div>
       </div>
     </div>
 
