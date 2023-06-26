@@ -29,7 +29,7 @@ defmodule HandCutWebWeb.SearchLive do
   def mount(_params, %{}, socket) do
     {:ok,
      socket
-     |> assign(form: to_form(%{"area" => :ny_brooklyn, "certification_type" => :certified_hand_slaughtered}))
+     |> assign(form: to_form(%{"area" => :nj_paterson, "certification_type" => :certified_hand_slaughtered}))
      |> assign(:page_title, "Search")}
   end
 
