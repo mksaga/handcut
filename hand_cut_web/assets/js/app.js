@@ -48,13 +48,17 @@ Hooks.Copy = {
     let { to } = this.el.dataset;
     this.el.addEventListener("click", (ev) => {
       ev.preventDefault();
+      document.getElementById("copy-address").classList.add("is-hidden")
       let text = document.querySelector(to).dataset.value;
       navigator.clipboard.writeText(text)
 
       // show "Copied" tag, then hide
       copiedText = document.getElementById("copied-text");
       copiedText.classList.remove("is-hidden");
-      setInterval(() => copiedText.classList.add("is-hidden"), 750);
+      setTimeout(() => {
+        copiedText.classList.add("is-hidden");
+        document.getElementById("copy-address").classList.remove("is-hidden")
+      }, 750);
     });
   },
 }

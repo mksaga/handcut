@@ -53,7 +53,7 @@ defmodule HandCutWebWeb.RestaurantLive do
                 <span id="address" data-value={@restaurant.address} class="is-size-7"><%= @restaurant.address %></span>
             </p>
             <button class="button is-small is-rounded ml-2" phx-hook="Copy" id="copy-address" data-to="#address" phx-update="ignore"><ion-icon name="copy-outline" class="ion-ionic"></ion-icon></button>
-            <span class="tag is-info is-light ml-2 is-hidden" id="copied-text">Copied!</span>
+            <span class="tag is-info is-light is-small is-rounded ml-2 is-hidden" id="copied-text">Copied!</span>
         </div>
         <div>
 
