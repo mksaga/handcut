@@ -20,6 +20,7 @@ defmodule HandCut.Restaurant.Areas do
       a when a in [:ny_queens, "ny_queens"] -> "Queens"
       a when a in [:ny_manhattan, "ny_manhattan"] -> "Manhattan"
       a when a in [:tx_irving, "tx_irving"] -> "Irving"
+      a when a in [:tx_dallas, "tx_dallas"] -> "Dallas"
       a when a in [:tx_plano, "tx_plano"] -> "Plano"
       a when a in [:tx_richardson, "tx_richardson"] -> "Richardson"
       _ -> ""
@@ -47,6 +48,7 @@ defmodule HandCut.Restaurant.Areas do
     [
       {"(TX) Irving", :tx_irving},
       {"(TX) Richardson", :tx_richardson},
+      {"(TX) Dallas", :tx_dallas},
       {"(TX) Plano", :tx_plano},
     ]
   end
