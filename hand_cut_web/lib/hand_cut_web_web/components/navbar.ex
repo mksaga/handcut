@@ -35,6 +35,7 @@ defmodule HandCutWebWeb.Components do
       case cuisine do
         c when c in [:thai, "thai"] -> "is-success"
         c when c in [:bengali, "bengali"] -> "is-success"
+        c when c in [:pakistani, "pakistani"] -> "is-success"
         c when c in [:indian, "indian"] -> "is-warning"
         c when c in [:chinese, "chinese"] -> "is-danger"
         c when c in [:mexican, "mexican"] -> "is-warning"
