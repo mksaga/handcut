@@ -12,17 +12,17 @@ defmodule HandCutWebWeb.RestaurantResult do
     <a href={Routes.restaurant_path(@socket, :show, String.split(@result.restaurant.code, "_") |> Enum.at(1))}>
     <div class="card mb-1">
         <div class="card-content p-4">
-            <div class="level is-mobile">
-                <div class="level-left">
                     <div>
                       <p class="title is-5 mb-0">
                         <span class="tag is-danger"><%= @result.label %></span>
                         <%= @result.restaurant.name %>
                       </p>
+                      </div>
+            <div class="level is-mobile">
+                <div class="level-left">
                         <%= if @result.certification != nil do %>
                           <Components.certification_label certification={@result.certification} />
                         <% end %>
-                    </div>
                 </div>
                 <div class="level-right">
                   <div class="level-item">
