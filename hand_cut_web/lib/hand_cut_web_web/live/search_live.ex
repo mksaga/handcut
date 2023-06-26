@@ -20,9 +20,10 @@ defmodule HandCutWebWeb.SearchLive do
   end
 
   def areas() do
-    excluded_areas = [:nj_newark, "nj_newark"]
+    excluded_areas = [:nj_newark, :nj_hackensack, :ny_brooklyn]
+    # Areas are tuples like {"(NJ) Newark", :nj_newark} so filter on elem(x, 1)
     Areas.all_areas()
-    |> Enum.filter(fn x -> not Enum.member?(excluded_areas, x) end)
+    |> Enum.filter(fn x -> not Enum.member?(excluded_areas, elem(x, 1)) end)
     |> Enum.sort()
   end
 
