@@ -15,6 +15,7 @@ defmodule HandCut.Restaurant.Areas do
       a when a in [:nj_newark, "nj_newark"] -> "Newark"
       a when a in [:nj_paterson, "nj_paterson"] -> "Paterson"
       a when a in [:nj_jersey_city, "nj_jersey_city"] -> "Jersey City"
+      a when a in [:nj_east_rutherford, "nj_east_rutherford"] -> "East Rutherford"
       a when a in [:nj_hackensack, "nj_hackensack"] -> "Hackensack"
       a when a in [:ny_brooklyn, "ny_brooklyn"] -> "Brooklyn"
       a when a in [:ny_queens, "ny_queens"] -> "Queens"
@@ -32,6 +33,7 @@ defmodule HandCut.Restaurant.Areas do
       {"(NJ) Newark", :nj_newark},
       {"(NJ) Hackensack", :nj_hackensack},
       {"(NJ) Paterson", :nj_paterson},
+      {"(NJ) East Rutherford", :nj_east_rutherford},
       {"(NJ) Jersey City", :nj_jersey_city},
     ]
   end
