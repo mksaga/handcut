@@ -8,7 +8,8 @@ defmodule HandCut.Projections.Certification do
     {"Beef", :beef},
     {"Veal", :veal},
     {"Lamb", :lamb},
-    {"Goat", :goat}
+    {"Goat", :goat},
+    {"All", :all},
   ]
 
   certification_types = [
