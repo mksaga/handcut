@@ -69,7 +69,6 @@ defmodule HandCutWebWeb.SearchLive do
 
         <.form for={@form} :let={f} phx-change="update" phx-submit="search">
           <.live_component module={AreaSelect} id="area-select" options={areas()} form={f}/>
-          <.live_component module={CertificationSelect} id="area-select" options={certification_types()} form={f}/>
           <div class="field">
             <%= submit "Search", class: "button is-link mx-6" %>
           </div>
