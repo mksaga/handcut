@@ -108,13 +108,17 @@ until $(curl --output /dev/null --silent --head --fail   localhost:${http}); do
 done
 color_prompt "✅ New app replied to liveness check"
 
+color_prompt "🔀 Switching ports over..."
 # Switch forwarding of ports 443 and 80 to the ones the new app is listening on
 sudo iptables -t nat -R PREROUTING 1 -p tcp --dport 80 -j REDIRECT --to-port ${http}
 sudo iptables -t nat -R PREROUTING 2 -p tcp --dport 443 -j REDIRECT --to-port ${https}
+color_prompt "✅ Ports swapped to new app!"
 
+color_prompt "🔌 Powering down previous release service..."
 # Stop the old version
 sudo systemctl stop hand_cut_web@${old_port}
 # Just in case the old version was started by systemd after a server
 # reboot, also stop the server_reboot version
+color_prompt "🔌 Powering down previous server_reboot service..."
 sudo systemctl stop hand_cut_web@server_reboot
 color_prompt '🚢 Deployed!'
